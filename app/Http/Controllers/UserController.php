@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Order;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Product;
@@ -18,7 +19,7 @@ class UserController extends Controller
     private $brand;
     private $comment;
     private $cart;
-    public function __construct()
+    public function __construct(private readonly Order $order)
     {
         $this->user=new User();
         $this->product=new Product();
@@ -120,7 +121,7 @@ class UserController extends Controller
         'created_at'=>date('Y-m-d H:i:s')
        ];
        $this->comment->insert_comment($data);
-      // return back();
+      return back();
     }
     // public function account($id)
     // {
@@ -141,7 +142,8 @@ class UserController extends Controller
     //}
     public function checkout(Request $request)
     {
-       $email="";
+        $email=null;
+        $name=null;
         $data=array();
         $cart=session()->get('cart');
             foreach($cart as $key){
@@ -149,11 +151,12 @@ class UserController extends Controller
                     $id_user=session('id');
                     $user=User::find($id_user);
                     $email=$user->email;
+                    $name=$user->usre_name;
                     $data=[
                     'id_product'=>$key['id'],
                     'id_customer'=>$id_user,
                     'quantity'=>$key['quantity'],
-                    'name'=>$user->user_name,
+                    'name'=>$name,
                     'phone'=>$user->phone,
                     'email'=>$email,
                     'address'=>$user->address,
@@ -162,21 +165,24 @@ class UserController extends Controller
                 ];
                 }else{
                     $email=$request->cus_email;
+                    $name=$request->cus_name;
                      $request->validate([
                         'cus_name'=>'required|min:2',
                         'cus_phone'=>'required',
-                        'cus_address'=>'required'
+                        'cus_address'=>'required',
+                         'cus_email'=>'required|email'
                     ],[
                         'cus_name.required'=>'Enter your name Please!',
                         'cus_name.min'=>'Enter your real Name Please!',
                         'cus_phone.required'=>'Enter your phone Please!',
-                        'cus_email.required'=>'Enter your phone Please!',
+                        'cus_email.required'=>'Enter your email Please!',
+                         'cus_email.email'=>'Enter your correct email!',
                         'cus_address.required'=>'Enter your address Please!'
                     ]);
                     $data=[
                         'id_product'=>$key['id'],
                         'quantity'=>$key['quantity'],
-                        'name'=>$request->cus_name,
+                        'name'=>$name,
                         'phone'=>$request->cus_phone,
                         'email'=>$email,
                         'address'=>$request->cus_address,
@@ -184,19 +190,15 @@ class UserController extends Controller
                         'created_at'=>date('Y-m-d H:i:s')
                     ];
                 }
-           $this->cart->insert_cart($data);
-
+           $this->order->insertOrder($data);
+                Mail::send('emails.order',compact('name'),function ($mail) use($name, $email){
+                    $mail->subject('Thanks');
+                    $mail->to($email,$name);
+                });
                 session()->flash('message_success','Dear Customer. You Just check out success! Your package is preparing');
             }
             session()->forget('cart');
             return back();
     }
-    public function sendemail()
-    {
-        $name='hung';
-        Mail::send('emails.order',compact('name'),function ($email) use($name){
-            $email->subject('Thank');
-            $email->to('cccanti.hl@gmail.com',$name);
-        });
-    }
+
 }

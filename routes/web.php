@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PaypalController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\AdminController;
@@ -17,7 +18,10 @@ use App\Http\Controllers\UserController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-use Laravel\Socialite\Facades\Socialite;
+
+Route::post('/pay',[PaypalController::class,'pay'])->name('pay');
+Route::get('success',[PaypalController::class,'success'])->name('success');
+Route::get('error',[PaypalController::class,'error'])->name('error');
 
 Route::get('/sendemail',[UserController::class,'sendemail']);
 

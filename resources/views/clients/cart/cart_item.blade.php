@@ -86,9 +86,9 @@
 						<ul>
 							<li>SubTotal: <span>{{ number_format($subtotal,'0','','.') }}</span></li>
 						</ul>
-						<form action="{{ route('checkout') }} " method="post">
+						<form action="{{ route('pay') }} " method="post">
 							@csrf
-
+                            <input type="hidden" name="amount" value="{{$subtotal}}">
 						@if (empty(session()->has('id')))
 						<div class="form-group col-md-12">
 							<label for="email">Email</label>

@@ -28,19 +28,19 @@
                         @include('clients.side_bar')
 					</div>
 				</div>
-				
+
 				<div class="col-sm-9 padding-right">
 						@yield('content')
-                       
+
 				</div>
-              
+
 			</div>
 		</div>
 	</section>
     <div class="container">
         @include('clients.comment')
     </div>
-    
+
     @include('clients.footer')
     <script src="{{asset('assets/js/jquery.js')}}"></script>
 	<script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
@@ -73,11 +73,11 @@
     		.always(function() {
     			console.log("complete");
     		});
-    		
+
     	});
     	});
-	
+
     </script>
-	
+
 </body>
 </html>

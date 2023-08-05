@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use Illuminate\Http\Request;
 use App\Models\Cart;
 use App\Models\User;
@@ -9,22 +10,15 @@ use App\Models\Product;
 class CartController extends Controller
 {
 
-    private $cart;
-    private $user;
-    public function __construct()
-    {
-        $this->cart=new Cart;
-        $this->user=new User;
-    }
     public function index(){
         $cartItem=session()->get('cart');
-       
+
         return view('clients.cart.cart_item',compact('cartItem'));
     }
     public function add_to_cart($id)
     {
        $product=Product::find($id);
-      
+
         $cart=session()->get('cart');
         if (isset($cart[$id])) {
             $cart[$id]['quantity']+=1;
@@ -56,6 +50,6 @@ class CartController extends Controller
         session()->put('cart',$cart);
         return back();
     }
-   
-    
+
+
 }
