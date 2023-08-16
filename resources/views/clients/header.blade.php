@@ -5,8 +5,11 @@
 					<div class="col-sm-6">
 						<div class="contactinfo">
 							<ul class="nav nav-pills">
-								<li><a href="#"><i class="fa fa-phone"></i> +84373245418</a></li>
-								<li><a href="#"><i class="fa fa-envelope"></i> admin@gmail.com</a></li>
+                                @if(session('id')==2)
+                                    <li><a href="{{route('dashboard')}}">Dashboard</a></li>
+                                @endif
+								<li><a href="tel:84373245418"><i class="fa fa-phone"></i> +84373245418</a></li>
+								<li><a href="mailto:admin@gmail.com"><i class="fa fa-envelope"></i>  Email us</a></li>
 							</ul>
 						</div>
 					</div>
@@ -24,7 +27,7 @@
 				</div>
 			</div>
 		</div><!--/header_top-->
-		
+
 		<div class="header-middle"><!--header-middle-->
 			<div class="container">
 				<div class="row">
@@ -33,22 +36,20 @@
 							<a href="{{route('client_home')}}"><img src="{{ asset('clients/images/home/logo.png') }}" alt="" /></a>
 						</div>
 					</div>
-					
+
 					<div class="col-sm-8">
 						<div class="shop-menu pull-right">
 							<ul class="nav navbar-nav">
 								@if (session('id'))
-								{{-- <li><a href="{{ route('account',['id'=>session('id')]) }}"><i class="fa fa-user"></i> Account</a></li> --}}
-								<li><a href="#"><i class="fa fa-user"></i> Account</a></li>
+								 <li><a href="{{ route('user_account') }}"><i class="fa fa-user"></i> Account</a></li>
 								@endif
-								
 								<li><a href="{{route('cart')}}"><i class="fa fa-shopping-cart"></i> Cart</a></li>
 								@if (session('id'))
 									<li><a href="{{route('logout')}}"><i class="fa fa-lock"></i>Hello, {{ session('user_name') }} Logout</a></li>
 								@else
 									<li><a href="{{ route('login') }}"><i class="fa fa-lock"></i> Login</a></li>
 								@endif
-								
+
 							</ul>
 						</div>
 					</div>

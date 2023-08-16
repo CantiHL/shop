@@ -27,7 +27,7 @@
 							<button type="submit" class="btn btn-default">Login</button>
 
 						</form>
-                        <a href="#" style="margin-top: 2rem" class="btn btn-default">Login with google</a>
+                        <a href="{{route('google-auth')}}" style="margin-top: 2rem" class="btn btn-default">Login with google</a>
 
 					</div><!--/login form-->
 				</div>

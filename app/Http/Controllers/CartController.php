@@ -2,18 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Order;
+use App\Models\paymethod;
 use Illuminate\Http\Request;
 use App\Models\Cart;
-use App\Models\User;
 use App\Models\Product;
+
 class CartController extends Controller
 {
+    public function __construct(private readonly paymethod $paymethod)
+    {
+    }
 
     public function index(){
         $cartItem=session()->get('cart');
-
-        return view('clients.cart.cart_item',compact('cartItem'));
+        $paymethods=$this->paymethod->getPaymethods();
+        return view('clients.cart.cart_item',compact('cartItem','paymethods'));
     }
     public function add_to_cart($id)
     {
@@ -50,6 +53,5 @@ class CartController extends Controller
         session()->put('cart',$cart);
         return back();
     }
-
 
 }

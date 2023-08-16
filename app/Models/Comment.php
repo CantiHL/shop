@@ -5,13 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use DB;
-class comment extends Model
+class Comment extends Model
 {
     use HasFactory;
 
     public function list_comment()
     {
-        return DB::table('comments')->join('users','users.id','comments.user_id')->paginate(4);
+        return DB::table('comments')->join('users','users.id','comments.user_id')->get();
     }
     public function insert_comment($data)
     {

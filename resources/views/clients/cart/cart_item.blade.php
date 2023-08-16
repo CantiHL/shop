@@ -11,7 +11,6 @@
     <link href="{{asset('clients/css/font-awesome.min.css')}}" rel="stylesheet">
 	<link href="{{asset('clients/css/main.css')}}" rel="stylesheet">
 	<link href="{{asset('clients/css/responsive.css')}}" rel="stylesheet">
-    <link rel="shortcut icon" href="{{asset('clients/images/ico/favicon.ico')}}">
 </head><!--/head-->
 
 <body>
@@ -84,9 +83,9 @@
 				<div class="col-sm-12">
 					<div class="total_area">
 						<ul>
-							<li>SubTotal: <span>{{ number_format($subtotal,'0','','.') }}</span></li>
+							<li>SubTotal: <span>${{ number_format($subtotal,'0','','.') }}</span></li>
 						</ul>
-						<form action="{{ route('pay') }} " method="post">
+						<form action="{{ route('checkout') }} " method="post">
 							@csrf
                             <input type="hidden" name="amount" value="{{$subtotal}}">
 						@if (empty(session()->has('id')))
@@ -123,9 +122,9 @@
                             <div class="form-group col-md-12">
                                 <label class="text-success" for="payment_method">Payment method</label>
                                 <select name="payment_method" id="payment_method" class="form-control">
-                                    <option selected value="">Pay when recive</option>
-                                    <option value="">Zalo</option>
-                                    <option value="">Paypal</option>
+                                   @foreach($paymethods as $paymethod)
+                                        <option value="{{$paymethod->value}}">{{$paymethod->name}}</option>
+                                   @endforeach
                                 </select>
                             </div>
 						<button type="submit" class="btn btn-block btn-default check_out" href="">Check Out</button>

@@ -38,10 +38,10 @@ class Product extends Model
             ->orwhere('product_date','like',"%$keyword%")
             ->orwhere('brand_name','like',"%$keyword%")
             ->orwhere('category_name','like',"%$keyword%");
-            
+
         }
-        return $data=$data->get();
-        
+        return $data=$data->paginate(9);
+
     }
     public function listId($id)
     {

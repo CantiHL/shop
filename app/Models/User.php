@@ -22,6 +22,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'google_id',
     ];
 
     /**
@@ -47,8 +48,21 @@ class User extends Authenticatable
     {
         return DB::table('users')->insertGetId($data);
     }
-    public function login($data)
+    public function getUserById($id)
     {
-        return DB::table('users')->where('email',$data['email'])->where('password',$data['password'])->first();
+        return DB::table('users')->where('id',$id)->first();
+    }
+    public function getUserByEmail($email)
+{
+    return DB::table('users')->where('email',$email)->first();
+}
+
+    public function update_user(int $id, array $data)
+    {
+        return DB::table('users')->where('id',$id)->update($data);
+    }
+    public function list_user()
+    {
+        return DB::table('users')->get();
     }
 }

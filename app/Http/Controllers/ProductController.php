@@ -6,6 +6,7 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Brand;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -59,7 +60,7 @@ class ProductController extends Controller
              $image_extenion=$product_image->extension();
              $image_name=rand(0,1000).'.'.$image_extenion;
              $data_entered['product_image']=$image_name;
-             $product_image->move(public_path('assets/img'),$image_name);
+             $product_image->move(public_path('assets/img/products'),$image_name);
         }
         $this->product->insert($data_entered);
         $request->session()->flash('message', 'Add Product To DB Success');
@@ -67,15 +68,19 @@ class ProductController extends Controller
     }
      public function delete_product(Request $request,$id)
     {
+        $productImg=Product::find($id);
         if ($this->product->deleteById($id)) {
             $request->session()->flash('message', 'Delete success');
+            if (file_exists(public_path('assets/img/products/'.$productImg->product_image))){
+                unlink(public_path('assets/img/products/'.$productImg->product_image));
+            }
             return back();
         } else {
-            $request->session()->flash('message', 'Delete unsuccess');
+            $request->session()->flash('message', 'Error');
             return back();
+            }
         }
 
-    }
     public function update_form($id)
     {
         $info_product=$this->product->listId($id);
@@ -103,15 +108,19 @@ class ProductController extends Controller
             'product_date'=>$request->product_date
         ];
         if ($product_image=$request->file('product_image')) {
+            $productImg=Product::find($id);
              $image_extenion=$product_image->extension();
              $image_name=rand(0,1000).'.'.$image_extenion;
              $data_entered['product_image']=$image_name;
              $product_image->move(public_path('assets/img/products'),$image_name);
+            if (file_exists(public_path('assets/img/products/'.$productImg->product_image))){
+                unlink(public_path('assets/img/products/'.$productImg->product_image));
+            }
         }
 
         $this->product->updateById($data_entered,$id);
         $request->session()->flash('message', 'Update Product To DB Success');
-        return back();
+        return redirect()->route('product_list');
     }
     public function update_status_product($id,$value){
         $this->product->updateStatus($id,$value);
