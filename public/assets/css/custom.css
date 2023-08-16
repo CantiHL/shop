@@ -1,0 +1,77 @@
+.slider {
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+    position: relative;
+}
+
+.slide {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+.search {
+    transform: translateY(10%);
+}
+.header-middle{
+    background-color: #dfdad1;
+    position: fixed;
+    z-index: 1000;
+    width: 100%;
+}
+.shop-menu ul li a {
+    background-color: #dfdad1;
+}
+
+.slider_cover,.product-detail-content {
+    margin-top: 171px;
+}
+.nav>li{
+    display: inline-block;
+}
+.nav-smartphone-more{
+    display:none;
+    position: absolute;
+    background-color: #dfdad1;
+    line-height: 32px;
+    width: 100%;
+    padding: 0;
+    top:100%;
+    text-align: center;
+}
+.nav>li a{
+    text-transform: uppercase;
+    color: #696763;
+}
+.nav>li a:hover{
+    color: #fe980f;
+}
+.nav li:hover .nav-smartphone-more{
+    display:  block;
+}
+.nav{
+    position: relative;
+}
+.nav-smartphone-more>li a{
+    text-transform: capitalize;
+}
+.nav-smartphone-more>li:hover{
+    background-color: #EEE;
+    color: #fe980f;
+}
+.footer-bottom .container .row .col-sm-3 .single-widget .nav li{
+    display: block;
+    text-transform: capitalize;
+}
+.footer-bottom .container .row .col-sm-3 .single-widget .nav li a{
+    text-transform: capitalize;
+}

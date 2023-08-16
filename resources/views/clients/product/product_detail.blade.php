@@ -1,20 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <title>Product Details | E-Shopper</title>
-     <link href="{{asset('clients/css/bootstrap.min.css')}}" rel="stylesheet">
-    <link href="{{asset('clients/css/font-awesome.min.css')}}" rel="stylesheet">
-	<link href="{{asset('clients/css/main.css')}}" rel="stylesheet">
-	<link href="{{asset('clients/css/responsive.css')}}" rel="stylesheet">
-</head><!--/head-->
-
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Shop_Digital</title>
+    <link href="{{asset('assets/css/bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{asset('assets/css/font-awesome.min.css')}}" rel="stylesheet">
+    <link href="{{asset('assets/css/main.css')}}" rel="stylesheet">
+    <link href="{{asset('assets/css/custom.css')}}" rel="stylesheet">
+    <link href="{{asset('assets/css/responsive.css')}}" rel="stylesheet">
+</head>
 <body>
 @include('clients.header')
-		<div class="container">
+		<div class="product-detail-content container">
 			<div class="row">
 				<div class="col-sm-12 padding-right">
 					@foreach($data as $product_detail)
@@ -52,41 +51,42 @@
 				</div>
 			</div>
 		</div>
-		@include('clients.footer')
-    <script src="{{asset('clients/js/jquery.js')}}"></script>
-	<script src="{{asset('clients/js/bootstrap.min.js')}}"></script>
-    <script src="{{asset('clients/js/main.js')}}"></script>
+@include('clients.footer')
+<script src="{{asset('clients/js/jquery.js')}}"></script>
+<script src="{{asset('clients/js/bootstrap.min.js')}}"></script>
+<script src="{{asset('clients/js/main.js')}}"></script>
+    <script>
+    $(function(){
+        $.ajaxSetup({
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+        });
+    $('.add_to_cart').on('click', function(event) {
+        event.preventDefault();
+        let url=$(this).data('url');
+        alert('Add to cacrt success');
+        $.ajax({
+            url: url,
+            type: 'get',
+            dataType: 'json',
+        })
+        .done(function() {
+            console.log("success");
+        })
+        .fail(function() {
+            console.log("error");
+        })
+        .always(function() {
+            console.log("complete");
+        });
 
-        <script>
-    	$(function(){
-    		$.ajaxSetup({
-              headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-              }
-            });
-		$('.add_to_cart').on('click', function(event) {
-    		event.preventDefault();
-    		let url=$(this).data('url');
-    		alert('Add to cacrt success');
-    		$.ajax({
-    			url: url,
-    			type: 'get',
-    			dataType: 'json',
-    		})
-    		.done(function() {
-    			console.log("success");
-    		})
-    		.fail(function() {
-    			console.log("error");
-    		})
-    		.always(function() {
-    			console.log("complete");
-    		});
+    });
+    });
+</script>
 
-    	});
-    	});
-
-
-    </script>
+<script src="{{asset('assets/js/jquery.js')}}"></script>
+<script src="{{asset('assets/js/main.js')}}"></script>
+<script src="{{asset('assets/js/custom.js')}}"></script>
 </body>
 </html>

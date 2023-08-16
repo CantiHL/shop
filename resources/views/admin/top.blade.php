@@ -21,6 +21,7 @@
                 <img class="img-profile rounded-circle"
                     src="{{ asset('assets/img/16aadbbaa3608acd8b25c9bb29b94b6a.jpg') }}">
             </a>
+
             <!-- Dropdown - User Information -->
             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                 aria-labelledby="userDropdown">
