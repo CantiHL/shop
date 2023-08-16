@@ -9,10 +9,55 @@
     <link href="{{asset('assets/css/font-awesome.min.css')}}" rel="stylesheet">
 	<link href="{{asset('assets/css/main.css')}}" rel="stylesheet">
 	<link href="{{asset('assets/css/responsive.css')}}" rel="stylesheet">
+    <style>
+        .slider {
+            width: 100%;
+            height: 300px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .slide {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+    </style>
+
 </head>
 <body>
     @include('clients.header')
-    <section>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4">
+                <img width="300px" height="300px" src="{{asset('assets/img/poster.png')}}" alt="Slide 1">
+            </div>
+            <div class="col-sm-8">
+                <div class="slider">
+                    <div class="slide">
+                        <img src="{{asset('assets/img/products/26.jpg')}}" alt="Slide 1">
+                    </div>
+                    <div class="slide">
+                        <img src="{{asset('assets/img/products/80.jpg')}}" alt="Slide 2">
+                    </div>
+                    <div class="slide">
+                        <img src="{{asset('assets/img/products/115.jpg')}}" alt="Slide 3">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section style="margin-top: 25px">
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-3">
@@ -36,36 +81,6 @@
     @include('clients.footer')
     <script src="{{asset('assets/js/jquery.js')}}"></script>
     <script src="{{asset('assets/js/main.js')}}"></script>
-    <script>
-    	$(function(){
-    		$.ajaxSetup({
-              headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-              }
-            });
-		$('.add_to_cart').on('click', function(event) {
-    		event.preventDefault();
-    		let url=$(this).data('url');
-    		alert('Add to cart success');
-    		$.ajax({
-    			url: url,
-    			type: 'get',
-    			dataType: 'json',
-    		})
-    		.done(function() {
-    			console.log("success");
-    		})
-    		.fail(function() {
-    			console.log("error");
-    		})
-    		.always(function() {
-    			console.log("complete");
-    		});
-
-    	});
-    	});
-
-    </script>
-
+    <script src="{{asset('assets/js/custom.js')}}"></script>
 </body>
 </html>

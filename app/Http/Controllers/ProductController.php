@@ -58,7 +58,7 @@ class ProductController extends Controller
         $product_image=$request->file('product_image');
         if ($product_image) {
              $image_extenion=$product_image->extension();
-             $image_name=rand(0,1000).'.'.$image_extenion;
+             $image_name=time() .rand(0,1000).'.'.$image_extenion;
              $data_entered['product_image']=$image_name;
              $product_image->move(public_path('assets/img/products'),$image_name);
         }
