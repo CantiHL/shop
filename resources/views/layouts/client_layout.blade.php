@@ -8,32 +8,56 @@
     <link href="{{asset('assets/css/bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{asset('assets/css/font-awesome.min.css')}}" rel="stylesheet">
     <link href="{{asset('assets/css/main.css')}}" rel="stylesheet">
-    <link href="{{asset('assets/css/custom.css')}}" rel="stylesheet">
+{{--    <link href="{{asset('assets/css/custom.css')}}" rel="stylesheet">--}}
 	<link href="{{asset('assets/css/responsive.css')}}" rel="stylesheet">
+
+    <style>
+        .slider {
+            width: 100%;
+            height: 300px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .slide {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+    </style>
 </head>
 <body>
     @include('clients.header')
     <div class="container">
         <div class="slider_cover row">
-            <div class="col-sm-4">
-                <img width="300px" height="300px" src="{{asset('assets/img/poster.png')}}" alt="Slide 1">
+            <div class="col-sm-3">
+                <img width="100%" height="100%" src="{{asset('assets/img/poster.png')}}" alt="Slide 1">
             </div>
-            <div class="col-sm-8">
+            <div class="col-sm-9">
                 <div class="slider">
                     <div class="slide">
-                        <img src="{{asset('assets/img/products/26.jpg')}}" alt="Slide 1">
+                        <img width="100%" height="100%" src="{{asset('assets/img/products/26.jpg')}}" alt="Slide 1">
                     </div>
                     <div class="slide">
-                        <img src="{{asset('assets/img/products/80.jpg')}}" alt="Slide 2">
+                        <img width="100%" height="100%" src="{{asset('assets/img/products/80.jpg')}}" alt="Slide 2">
                     </div>
                     <div class="slide">
-                        <img src="{{asset('assets/img/products/115.jpg')}}" alt="Slide 3">
+                        <img width="100%" height="100%" src="{{asset('assets/img/products/115.jpg')}}" alt="Slide 3">
                     </div>
                     <div class="slide">
-                        <img src="{{asset('assets/img/products/185.jpg')}}" alt="Slide 3">
+                        <img width="100%" height="100%" src="{{asset('assets/img/products/185.jpg')}}" alt="Slide 3">
                     </div>
                     <div class="slide">
-                        <img src="{{asset('assets/img/Realme-114G-GRQ-800-200-800x200-1.png')}}" alt="Slide 3">
+                        <img width="100%" height="100%" src="{{asset('assets/img/Realme-114G-GRQ-800-200-800x200-1.png')}}" alt="Slide 3">
                     </div>
                 </div>
             </div>
@@ -43,17 +67,15 @@
     <section style="margin-top: 30px">
 		<div class="container">
 			<div class="row">
-{{--				<div class="col-sm-3">--}}
-{{--					<div class="left-sidebar">--}}
-{{--                        @include('clients.side_bar')--}}
-{{--					</div>--}}
-{{--				</div>--}}
-
-				<div class="col-sm-12 padding-right">
-						@yield('content')
-
+				<div class="col-sm-3">
+					<div class="left-sidebar">
+                        @include('clients.side_bar')
+					</div>
+                    <img style="margin-top: 50px"  width="100%" height="100%" src="{{asset('assets/img/poster.png')}}" alt="Slide 1">
 				</div>
-
+				<div class="col-sm-9 padding-right">
+						@yield('content')
+				</div>
 			</div>
 		</div>
 	</section>

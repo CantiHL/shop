@@ -4,7 +4,7 @@
 						<h2 class="title text-center">Smart Phone</h2>
 						@foreach ($data_products as $record)
 						<a href="{{ route('product_detail',['id'=>$record->id]) }}">
-							<div class="col-sm-3">
+							<div class="col-sm-4">
                                 <div class="product-image-wrapper">
                                     <div class="single-products">
                                             <div class="productinfo text-center">
