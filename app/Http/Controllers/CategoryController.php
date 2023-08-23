@@ -20,7 +20,7 @@ class CategoryController extends Controller
     public function index()
     {
         $data_categories=$this->category->list();
-        return view('admin.categories.category_list',compact(['data_categories']));
+        return view('admin.categories.list',compact(['data_categories']));
     }
 
     public function add_form()
@@ -30,22 +30,16 @@ class CategoryController extends Controller
     public function add_to_db(Request $request)
     {
         $request->validate([
-            'category_name' => 'required',
-            'category_description' => 'required',
+            'name' => 'required',
+            'description' => 'required',
         ]);
 
         $data_entered=[
-            'category_name'=>$request->category_name,
-            'category_image'=>$request->category_image,
-            'category_description'=>$request->category_description,
+            'name'=>$request->name,
+            'description'=>$request->description,
             'created_at'=>date('Y-m-d')
         ];
-        if ($category_image=$request->file('category_image')) {
-             $image_extenion=$category_image->extension();
-             $image_name=rand(0,1000).'.'.$image_extenion;
-             $data_entered['category_image']=$image_name;
-             $category_image->move(public_path('assets/img/categories'),$image_name);
-        }
+
         if ($data_entered) {
             if ($this->category->insert($data_entered)) {
                 $request->session()->flash('message', 'Insert category To DB Success');
@@ -70,22 +64,16 @@ class CategoryController extends Controller
     public function update_to_db(Request $request,$id)
     {
         $request->validate([
-            'category_name' => 'required',
-            'category_description' => 'required',
+            'name' => 'required',
+            'description' => 'required',
         ]);
 
         $data_entered=[
-            'category_name'=>$request->category_name,
-            'category_image'=>$request->category_image,
-            'category_description'=>$request->category_description,
+            'name'=>$request->name,
+            'description'=>$request->description,
             'updated_at'=>date('Y-m-d')
         ];
-        if ($category_image=$request->file('category_image')) {
-             $image_extenion=$category_image->extension();
-             $image_name=rand(0,1000).'.'.$image_extenion;
-             $data_entered['category_image']=$image_name;
-             $category_image->move(public_path('assets/img/categories'),$image_name);
-        }
+
         if ($data_entered) {
             if ($this->category->updateById($data_entered,$id)) {
                  $request->session()->flash('message', 'Update category To DB Success');

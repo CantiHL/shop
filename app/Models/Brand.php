@@ -8,23 +8,20 @@ use DB;
 class Brand extends Model
 {
     use HasFactory;
-    public function list_active(){
-       return DB::table('brands')->where('brand_status',0)->get();
-    }
     public function list(){
-        return DB::table('brands')->get();
+        return DB::table('brands')->limit(5)->get();
      }
      public function updateStatus($id,$value)
      {
-         return DB::table('brands')->where('brand_id',$id)->update(['brand_status'=>$value],);
+         return DB::table('brands')->where('id',$id)->update($value);
      }
      public function listId($id)
      {
-         return DB::table('brands')->where('brand_id',$id)->get();
+         return DB::table('brands')->where('id',$id)->get();
      }
      public function updateById($data,$id)
      {
-         return DB::table('brands')->where('brand_id',$id)->update($data);
+         return DB::table('brands')->where('id',$id)->update($data);
      }
      public function insert($data)
      {
@@ -32,6 +29,10 @@ class Brand extends Model
      }
      public function deleteById($id)
     {
-        return DB::table('brands')->where('brand_id',$id)->delete();
+        return DB::table('brands')->where('id',$id)->delete();
+    }
+    public function products()
+    {
+        return $this->hasMany(Product::class);
     }
 }

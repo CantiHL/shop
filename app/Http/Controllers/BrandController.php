@@ -19,12 +19,8 @@ class BrandController extends Controller
     }
     public function index()
     {
-        $data_brands=$this->brand->list();
-        return view('admin.brands.brand_list',compact(['data_brands']));
-    }
-    public function update_status_brand($id,$value){
-        $this->brand->updateStatus($id,$value);
-        return back();
+        $data_brands=Brand::all();
+        return view('admin.brands.list',compact(['data_brands']));
     }
     public function add_form()
     {
@@ -33,22 +29,15 @@ class BrandController extends Controller
     public function add_to_db(Request $request)
     {
         $request->validate([
-            'brand_name' => 'required',
-            'brand_description' => 'required',
+            'name' => 'required',
+            'description' => 'required',
         ]);
 
         $data_entered=[
-            'brand_name'=>$request->brand_name,
-            'brand_image'=>$request->brand_image,
-            'brand_description'=>$request->brand_description,
+            'name'=>$request->name,
+            'description'=>$request->description,
             'created_at'=>date('Y-m-d')
         ];
-        if ($brand_image=$request->file('brand_image')) {
-             $image_extenion=$brand_image->extension();
-             $image_name=rand(0,1000).'.'.$image_extenion;
-             $data_entered['brand_image']=$image_name;
-             $brand_image->move(public_path('assets/img/brands'),$image_name);
-        }
         if ($data_entered) {
             if ($this->brand->insert($data_entered)) {
                 $request->session()->flash('message', 'Insert brand To DB Success');
@@ -68,22 +57,15 @@ class BrandController extends Controller
     public function update_to_db(Request $request,$id)
     {
         $request->validate([
-            'brand_name' => 'required',
-            'brand_description' => 'required',
+            'name' => 'required',
+            'description' => 'required',
         ]);
 
         $data_entered=[
-            'brand_name'=>$request->brand_name,
-            'brand_image'=>$request->brand_image,
-            'brand_description'=>$request->brand_description,
+            'name'=>$request->name,
+            'description'=>$request->description,
             'updated_at'=>date('Y-m-d')
         ];
-        if ($brand_image=$request->file('brand_image')) {
-             $image_extenion=$brand_image->extension();
-             $image_name=rand(0,1000).'.'.$image_extenion;
-             $data_entered['brand_image']=$image_name;
-             $brand_image->move(public_path('assets/img/brands'),$image_name);
-        }
         if ($data_entered) {
             if ($this->brand->updateById($data_entered,$id)) {
                  $request->session()->flash('message', 'Update brand To DB Success');

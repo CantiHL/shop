@@ -136,39 +136,5 @@
 	</section><!--/#do_action-->
 	@endif
 	@include('clients.footer')
-	</footer><!--/Footer-->
-
-
-
-{{--     <script>
-    	$(function(){
-    		$(document).on('click', '.check_out', function(event) {
-    			event.preventDefault();
-    			console.log($('#inputName').val());
-    			$.ajax({
-    				url: $(this).data('url'),
-    				type: 'get',
-    				dataType: 'json',
-    				data: {
-    					cus_name: $('#inputName').val(),
-    					cus_phone: $('#inputPhone').val(),
-    					cus_address: $('#inputAddress').val(),
-    					note: $('#Note').val(),
-
-    			},
-    			})
-    			.done(function() {
-    				console.log("success");
-    			})
-    			.fail(function() {
-    				console.log("error");
-    			})
-    			.always(function() {
-    				console.log("complete");
-    			});
-
-    		});
-    	});
-    </script> --}}
 </body>
 </html>

@@ -45,19 +45,13 @@
             <div class="col-sm-9">
                 <div class="slider">
                     <div class="slide">
-                        <img width="100%" height="100%" src="{{asset('assets/img/products/26.jpg')}}" alt="Slide 1">
+                        <img width="100%" height="100%" src="{{asset('assets/img/1.png')}}" alt="Slide 1">
                     </div>
                     <div class="slide">
-                        <img width="100%" height="100%" src="{{asset('assets/img/products/80.jpg')}}" alt="Slide 2">
+                        <img width="100%" height="100%" src="{{asset('assets/img/2.png')}}" alt="Slide 2">
                     </div>
                     <div class="slide">
-                        <img width="100%" height="100%" src="{{asset('assets/img/products/115.jpg')}}" alt="Slide 3">
-                    </div>
-                    <div class="slide">
-                        <img width="100%" height="100%" src="{{asset('assets/img/products/185.jpg')}}" alt="Slide 3">
-                    </div>
-                    <div class="slide">
-                        <img width="100%" height="100%" src="{{asset('assets/img/Realme-114G-GRQ-800-200-800x200-1.png')}}" alt="Slide 3">
+                        <img width="100%" height="100%" src="{{asset('assets/img/3.png')}}" alt="Slide 3">
                     </div>
                 </div>
             </div>
@@ -79,9 +73,6 @@
 			</div>
 		</div>
 	</section>
-{{--    <div class="container">--}}
-{{--        @include('clients.comment')--}}
-{{--    </div>--}}
 
     @include('clients.footer')
     <script src="{{asset('assets/js/jquery.js')}}"></script>

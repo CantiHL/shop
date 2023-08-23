@@ -57,12 +57,29 @@ class User extends Authenticatable
     return DB::table('users')->where('email',$email)->first();
 }
 
-    public function update_user(int $id, array $data)
+    public function update_user($data,$id)
     {
         return DB::table('users')->where('id',$id)->update($data);
     }
     public function list_user()
     {
-        return DB::table('users')->get();
+        //DB::enableQueryLog();
+        return DB::table('users')->where('position',1)->get();
+       // dd(DB::getQueryLog($sql));
+    }
+
+    public function insert(array $data)
+    {
+        return DB::table('users')->insertGetId($data);
+    }
+
+    public function deleteById($id)
+    {
+        return DB::table('users')->where('id',$id)->delete();
+
+    }
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
     }
 }

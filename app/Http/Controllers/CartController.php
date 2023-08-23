@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\paymethod;
 use Illuminate\Http\Request;
-use App\Models\Cart;
 use App\Models\Product;
 
 class CartController extends Controller
@@ -30,9 +29,9 @@ class CartController extends Controller
         {
             $cart[$id]=[
                 'id'=>$id,
-                'name'=>$product->product_name,
-                'price'=>$product->product_price,
-                'image'=>$product->product_image,
+                'name'=>$product->name,
+                'price'=>$product->price,
+                'image'=>$product->image,
                 'quantity'=>1
             ];
             session()->put('cart',$cart);

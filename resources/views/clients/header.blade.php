@@ -5,7 +5,7 @@
 					<div class="col-sm-6">
 						<div class="contactinfo">
 							<ul class="nav nav-pills">
-                                @if(session('id')==2)
+                                @if(session('id')==1)
                                     <li><a href="{{route('dashboard')}}">Dashboard</a></li>
                                 @endif
 								<li><a href="tel:84373245418"><i class="fa fa-phone"></i> +84373245418</a></li>

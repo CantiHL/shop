@@ -19,9 +19,8 @@ return new class extends Migration
             $table->string('password');
             $table->string('address');
             $table->string('phone');
-            $table->string('phone');
-            $table->integer('positon')->definition(0);
-            $table->string('google_id');
+            $table->integer('position')->default(1);
+            $table->string('google_id')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

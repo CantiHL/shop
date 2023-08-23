@@ -10,38 +10,40 @@ class Product extends Model
     use HasFactory;
 
     protected $fillable = [
-        'product_name',
-        'product_price',
-        'product_brand_id',
-        'product_category_id',
-        'product_description',
-        'product_date'
+        'name',
+        'price',
+        'id',
+        'id',
+        'description'
     ];
 
     public function list()
     {
-        return DB::table('products')->join('brands','products.product_brand_id','=','brands.brand_id')->join('categories','products.product_category_id','=','categories.category_id')->get();
+        return DB::table('products')->join('brands','products.id','=','brands.id')->join('categories','products.id','=','categories.id')->get();
+
     }
-    public function list_for_client($filter,$keyword)
+    public function list_show($filter,$keyword)
     {
-        $data=DB::table('products')
-        ->join('brands','products.product_brand_id','=','brands.brand_id')
-        ->join('categories','products.product_category_id','=','categories.category_id')
-        ->where('product_status',0);
-        if(!empty($filter)){
-            $data=$data->where($filter);
+        $data=Product::with(['brand','category']);
+        if(!empty($filter['product_brand_id'])){
+            $data=$data->whereHas('brand', function ($query) use ($filter){
+                    $query->where('brand_id',$filter['product_brand_id']);
+                }
+            );
+        }
+        if(!empty($filter['product_category_id'])){
+            $data=$data->whereHas('category', function ($query) use ($filter){
+                $query->where('category_id',$filter['product_category_id']);
+            }
+            );
         }
         if(!empty($keyword)){
-            $data=$data->where('product_name','like',"%$keyword%")
-            ->orwhere('product_price','like',"%$keyword%")
-            ->orwhere('product_description','like',"%$keyword%")
-            ->orwhere('product_date','like',"%$keyword%")
-            ->orwhere('brand_name','like',"%$keyword%")
-            ->orwhere('category_name','like',"%$keyword%");
-
+            $data=$data->where(function ($query) use ($keyword){
+                $query->where('name','like',"%$keyword%");
+                $query->orWhere('price',"$keyword");
+            });
         }
         return $data=$data->paginate(9);
-
     }
     public function listId($id)
     {
@@ -61,15 +63,39 @@ class Product extends Model
     }
     public function updateStatus($id,$value)
     {
-        return DB::table('products')->where('id',$id)->update(['product_status'=>$value],);
+        return DB::table('products')->where('id',$id)->update(['status'=>$value],);
     }
-    public function get_product_detail($id)
+    public function get_detail($id)
     {
         return DB::table('products')
-        ->join('brands','products.product_brand_id','=','brands.brand_id')
-        ->join('categories','products.product_category_id','=','categories.category_id')
+        ->join('brands','products.id','=','brands.id')
+        ->join('categories','products.id','=','categories.id')
         ->where('id',$id)
         ->get();
 
+    }
+    public function averageRating()
+    {
+        return round($this->reviews()->avg('rating'),2);
+    }
+    public function countRating()
+    {
+        return $this->reviews()->count('rating');
+    }
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
+    public function brand()
+    {
+        return $this->belongsTo(Brand::class);
+    }
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
     }
 }

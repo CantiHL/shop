@@ -1,7 +1,10 @@
 <?php
 
-use App\Http\Controllers\CommentController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\GoogleAuthController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PaypalController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
@@ -27,18 +30,16 @@ Route::get('/auth/google/call-back',[GoogleAuthController::class,'callbackGoogle
 
 Route::prefix('/pay/paypal')->group(function (){
     Route::post('/',[PaypalController::class,'pay'])->name('pay');
-    Route::get('/success/{orderID}',[PaypalController::class,'success'])->name('success');
+    Route::get('/success',[PaypalController::class,'success'])->name('success');
     Route::get('/error',[PaypalController::class,'error'])->name('error');
 });
 
-
-
 Route::middleware('auth.middleware')->group(function (){
-    Route::prefix('/admin')->group(function (){
-        Route::get('/',[AdminController::class,'index'])->name('dashboard');
-        Route::get('/list-order',[AdminController::class,'order'])->name('order');
-        Route::get('/list-order/update-order',[AdminController::class,'update_order'])->name('update_order');
-        Route::get('/list-order/delete-order',[AdminController::class,'delete_order'])->name('delete_order');
+    Route::get('/admin',[AdminController::class,'index'])->name('dashboard');
+    Route::prefix('/order')->group(function (){
+        Route::get('/list-order',[OrderController::class,'order'])->name('order');
+        Route::get('/list-order/update-order',[OrderController::class,'update_order'])->name('update_order');
+        Route::get('/list-order/delete-order',[OrderController::class,'delete_order'])->name('delete_order');
     });
     Route::prefix('/product')->group(function (){
         Route::get('/',[ProductController::class,'index'])->name('product_list');
@@ -68,7 +69,14 @@ Route::middleware('auth.middleware')->group(function (){
         Route::get('/delete/{id}',[CategoryController::class,'delete_category'])->name('delete_category');
         Route::get('/update-status-category/{id}/{value}',[CategoryController::class,'update_status_category'])->name('update_status_category');
     });
-
+    Route::prefix('/user')->group(function (){
+        Route::get('/list',[UserController::class,'userInfo'])->name('user_list');
+        Route::get('/add',[UserController::class,'add_form'])->name('add_user');
+        Route::post('/add',[UserController::class,'add_to_db']);
+        Route::get('/edit/{id}',[UserController::class,'update_form'])->name('edit_form_user');
+        Route::post('/edit/{id}',[UserController::class,'update_to_db']);
+        Route::get('/delete/{id}',[UserController::class,'delete_category'])->name('delete_user');
+    });
 });
 
 Route::prefix('/cart')->group(function (){
@@ -79,15 +87,19 @@ Route::prefix('/cart')->group(function (){
 
 });
 
-Route::get('/sendemail',[UserController::class,'sendemail']);
-Route::get('/login',[UserController::class,'login'])->name('login');
-Route::post('/user/register',[UserController::class,'register'])->name('register');
-Route::post('/check',[UserController::class,'check'])->name('checkuser');
-Route::get('/logout',[UserController::class,'logout'])->name('logout');
-Route::get('/home-page',[UserController::class,'index'])->name('client_home');
+Route::prefix('/auth')->group(function (){
+    Route::get('/login',[AuthController::class,'login'])->name('login');
+    Route::post('/user/register',[AuthController::class,'register'])->name('register');
+    Route::post('/check',[AuthController::class,'check'])->name('checkuser');
+    Route::get('/logout',[AuthController::class,'logout'])->name('logout');
+});
+
+Route::get('/home-page',[HomeController::class,'index'])->name('client_home');
+Route::get('/search',[HomeController::class,'index'])->name('search');
+
 Route::get('/account/detail',[UserController::class,'account'])->name('user_account');
 Route::post('/account/update',[UserController::class,'update_account'])->name('update_account');
-Route::get('/search',[UserController::class,'index'])->name('search');
-Route::post('/comment',[CommentController::class,'comment'])->name('comment');
+Route::post('/review',[ReviewController::class,'review'])->name('review');
 Route::post('/checkout',[UserController::class,'checkout'])->name('checkout');
 Route::get('/product-detail/{id}',[ProductController::class,'product_detail'])->name('product_detail');
+Route::get('/sendemail',[UserController::class,'sendemail']);
