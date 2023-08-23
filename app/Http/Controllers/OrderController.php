@@ -10,9 +10,7 @@ use Illuminate\Http\Request;
 class OrderController extends Controller
 {
     public function __construct(
-        private readonly Order $order,
-        private readonly User $user,
-        private readonly Payment $payment
+        private readonly Order $order
     ){
 
     }
