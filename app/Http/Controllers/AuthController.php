@@ -55,6 +55,7 @@ class AuthController extends Controller
                 if ($user->position===0) {
                     $request->session()->put('id', $user->id);
                     $request->session()->put('user_name', $user->user_name);
+                    $request->session()->put('admin', $user->id);
                     return redirect()->route('dashboard');
                 }else{
                     $request->session()->put('id', $user->id);
@@ -70,6 +71,7 @@ class AuthController extends Controller
     public function logout(Request $request){
         $request->session()->forget('id');
         $request->session()->forget('user_name');
+        $request->session()->forget('admin');
         return redirect()->route('login');
 
     }

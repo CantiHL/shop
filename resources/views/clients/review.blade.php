@@ -1,5 +1,5 @@
 <div class="recommended_items"><!--comment-->
-	<h2 class="title text-center">comment place</h2>
+	<h2 class="title text-center">Review</h2>
     <div class="container"  style="overflow: scroll; width: auto; height: 355px" >
         @foreach ($reviews as $review)
             <div class="comment col-sm-3">

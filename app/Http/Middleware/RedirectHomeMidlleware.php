@@ -15,8 +15,8 @@ class RedirectHomeMidlleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-//        dd($request);
-        if ($request->getRequestUri()=='/example-app/public/'){
+//        dd($request->getBaseUrl());
+        if ($request->getRequestUri()==$request->getBaseUrl().'/'){
             return redirect(route('client_home'));
         }
         return $next($request);

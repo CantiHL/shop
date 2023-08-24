@@ -68,7 +68,6 @@ class UserController extends Controller
                     'email'=>$email,
                     'address'=>$user->address,
                     'note'=>$request->note,
-                    'total'=>$request->amount,
                     'created_at'=>date('Y-m-d H:i:s')
                 ];
             }else{
@@ -95,14 +94,13 @@ class UserController extends Controller
                     'email'=>$email,
                     'address'=>$request->cus_address,
                     'note'=>$request->note,
-                    'total'=>$request->amount,
                     'created_at'=>date('Y-m-d H:i:s')
                 ];
             }
             $orderID[]=$this->order->insertOrder($data);
         }
         $request->request->add(['orderID'=>$orderID]);
-        Mail::send('emails.order',compact('name'),function ($mail) use($name, $email){
+        Mail::send('emails.order',compact('carts'),function ($mail) use($name, $email){
             $mail->subject('Thanks');
             $mail->to($email,$name);
         });

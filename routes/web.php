@@ -38,6 +38,7 @@ Route::middleware('auth.middleware')->group(function (){
     Route::get('/admin',[AdminController::class,'index'])->name('dashboard');
     Route::prefix('/order')->group(function (){
         Route::get('/list-order',[OrderController::class,'order'])->name('order');
+        Route::get('/statistical',[OrderController::class,'statistical'])->name('statistical');
         Route::get('/list-order/update-order',[OrderController::class,'update_order'])->name('update_order');
         Route::get('/list-order/delete-order',[OrderController::class,'delete_order'])->name('delete_order');
     });
