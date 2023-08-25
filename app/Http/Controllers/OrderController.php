@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\OrdersExport;
 use App\Models\Order;
-use App\Models\Payment;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+use Excel;
 class OrderController extends Controller
 {
     public function __construct(
@@ -37,9 +36,10 @@ class OrderController extends Controller
         $quantity = Order::where('orders.status','done')->sum('quantity');
         $revenue = Order::join('products', 'orders.product_id', '=', 'products.id')->where('orders.status','done')
             ->sum(DB::raw('orders.quantity * products.price'));
-        $details = Order::join('products', 'orders.product_id', '=', 'products.id')->where('orders.status','done')->select(['products.name as name','products.price as price','orders.quantity as quantity'])
-            ->get();
-//        dd($details);
+        $details = $this->order->getDetailsOrder();
         return view('admin.statistical.statistical', compact(['quantity','revenue','details']));
+    }
+    public function expportOrders(){
+        return Excel::download(new OrdersExport(), 'orders.xlsx');
     }
 }

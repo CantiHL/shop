@@ -100,6 +100,7 @@ class UserController extends Controller
             $orderID[]=$this->order->insertOrder($data);
         }
         $request->request->add(['orderID'=>$orderID]);
+//        dd($carts);
         Mail::send('emails.order',compact('carts'),function ($mail) use($name, $email){
             $mail->subject('Thanks');
             $mail->to($email,$name);

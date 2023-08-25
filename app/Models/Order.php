@@ -17,9 +17,14 @@ class Order extends Model
     {
         return DB::table('orders')->get();
     }
-    public function updateStatus($id,$data)
+    public function getDetailsOrder()
     {
-        return DB::table('orders')->where('id',$id)->update($data);
+        return DB::table('orders')
+            ->join('products', 'orders.product_id', '=', 'products.id')
+            ->select('product_id', DB::raw('COUNT(quantity) as quantity'), 'products.name', 'products.price')
+            ->where('orders.status', '=', 'done')
+            ->groupBy('product_id', 'products.name', 'products.price')
+            ->get();;
     }
     public function deleteOrder($id)
     {

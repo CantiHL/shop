@@ -4,9 +4,11 @@
     <div class="card shadow mb-4">
         <div class="card-body">
             <div class="table-responsive">
+                <a class="btn btn-google" href="{{route('expport_orders')}}">export excel</a>
                 <table class="table table-bordered table-success" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                     <tr>
+                        <th>Product Id</th>
                         <th>Product name</th>
                         <th>Product Price</th>
                         <th>Quantity</th>
@@ -15,6 +17,7 @@
                     <tbody>
                     @foreach($details as $detail)
                         <tr>
+                            <td>{{$detail->product_id}}</td>
                             <td>{{$detail->name}}</td>
                             <td>{{$detail->price}}</td>
                             <td>{{$detail->quantity}}</td>
@@ -25,7 +28,7 @@
             </div>
         </div>
     </div>
-    <h1 class="h3 mb-2 text-gray-800">Statistical</h1>
+    <h1 class="h3 mb-2 text-gray-800">Total</h1>
     <div class="card shadow mb-4">
         <div class="card-body">
             <div class="table-responsive">

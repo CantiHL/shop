@@ -45,13 +45,13 @@
     @endphp
     @foreach($carts as $order)
         <tr>
-            <td>{{$order->name}}</td>
-            <td>{{$order->price}}</td>
-            <td>{{$order->quantity}}</td>
-            <td>{{$order->price*$order->quantity}}</td>
+            <td>{{$order['name']}}</td>
+            <td>{{$order['price']}}</td>
+            <td>{{$order['quantity']}}</td>
+            <td>${{$order['price']*$order['quantity']}}</td>
         </tr>
         @php
-            $total+=$order->price*$order->quantit
+            $total+=$order['price']*$order['quantity']
         @endphp
     @endforeach
 
@@ -59,7 +59,7 @@
     <tfoot>
     <tr>
         <td colspan="3" class="total">SubTotal:</td>
-        <td class="total">{{$total}}</td>
+        <td class="total">${{$total}}</td>
     </tr>
     </tfoot>
 </table>

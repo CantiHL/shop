@@ -32,7 +32,6 @@ class AuthController extends Controller
         $this->user->register($data);
         $request->session()->flash('message', 'register success');
         return back();
-
     }
     public function login()
     {

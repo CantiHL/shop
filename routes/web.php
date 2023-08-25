@@ -39,6 +39,7 @@ Route::middleware('auth.middleware')->group(function (){
     Route::prefix('/order')->group(function (){
         Route::get('/list-order',[OrderController::class,'order'])->name('order');
         Route::get('/statistical',[OrderController::class,'statistical'])->name('statistical');
+        Route::get('/export-orders',[OrderController::class,'expportOrders'])->name('expport_orders');
         Route::get('/list-order/update-order',[OrderController::class,'update_order'])->name('update_order');
         Route::get('/list-order/delete-order',[OrderController::class,'delete_order'])->name('delete_order');
     });
