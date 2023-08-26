@@ -57,7 +57,7 @@ class User extends Authenticatable
     return DB::table('users')->where('email',$email)->first();
 }
 
-    public function update_user($data,$id)
+    public function update_user($id,$data)
     {
         return DB::table('users')->where('id',$id)->update($data);
     }
@@ -81,5 +81,10 @@ class User extends Authenticatable
     public function reviews()
     {
         return $this->hasMany(Review::class);
+    }
+
+    public function updatePassword($id,$data)
+    {
+        return DB::table('users')->where('id',$id)->update($data);
     }
 }

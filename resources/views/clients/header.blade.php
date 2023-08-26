@@ -35,17 +35,10 @@
             <div class="row">
                 <div class="col-sm-4">
                     <div class="logo pull-left">
-                        <a href="{{route('client_home')}}"><img src="{{ asset('clients/images/home/logo.png') }}"
+                        <a href="{{route('client_home')}}"><img src="{{ asset('assets/images/home/logo.png') }}"
                                                                 alt=""/></a>
-
                     </div>
-
                 </div>
-                {{--                    <div class="col-sm-4">--}}
-                {{--                        <div class="search">--}}
-                {{--                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">--}}
-                {{--                        </div>--}}
-                {{--                    </div>--}}
                 <div class="col-sm-8">
                     <div class="shop-menu pull-right">
                         <ul class="nav navbar-nav">

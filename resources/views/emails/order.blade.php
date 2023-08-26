@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Hóa đơn</title>
+    <h3>Thanks for using our website</h3>
+    <title>Bill</title>
     <style>
         body {
             font-family: Arial, sans-serif;

@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\IDCheckMiddlware;
 use App\Http\Middleware\RedirectHomeMidlleware;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -67,5 +68,6 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'auth.middleware' => \App\Http\Middleware\AuthMiddleware::class,
+        'idcheck'=>IDCheckMiddlware::class,
     ];
 }

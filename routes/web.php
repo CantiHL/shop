@@ -96,11 +96,14 @@ Route::prefix('/auth')->group(function (){
     Route::get('/logout',[AuthController::class,'logout'])->name('logout');
 });
 
+Route::middleware('idcheck')->group(function (){
+    Route::get('/account/detail',[UserController::class,'account'])->name('user_account');
+    Route::post('/account/upadtepasword',[UserController::class,'upadtepasword'])->name('upadtepasword');
+    Route::post('/account/update',[UserController::class,'update_account'])->name('update_account');
+});
+
 Route::get('/home-page',[HomeController::class,'index'])->name('client_home');
 Route::get('/search',[HomeController::class,'index'])->name('search');
-
-Route::get('/account/detail',[UserController::class,'account'])->name('user_account');
-Route::post('/account/update',[UserController::class,'update_account'])->name('update_account');
 Route::post('/review',[ReviewController::class,'review'])->name('review');
 Route::post('/checkout',[UserController::class,'checkout'])->name('checkout');
 Route::get('/product-detail/{id}',[ProductController::class,'product_detail'])->name('product_detail');

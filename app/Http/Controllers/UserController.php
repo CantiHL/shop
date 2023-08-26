@@ -171,22 +171,32 @@ class UserController extends Controller
             'phone'=>$request->phone,
             'address'=>$request->address,
         ];
-
-        if ($data) {
-            if ($this->user->update_user($data,$id)) {
-                $request->session()->flash('message', 'Update Success');
-                return back();
-            } else {
-                $request->session()->flash('message', 'Update Unsuccess. Please check your enter infor');
-                return back();
-            }
-
-        }
+        $this->user->update_user($id,$data);
+        $request->session()->flash('message', 'Success');
+        return back();
     }
     public function delete_category(Request $request,$id)
     {
         $this->user->deleteById($id);
         $request->session()->flash('message', 'Delete success');
+        return back();
+    }
+    public function upadtepasword(Request $request)
+    {
+        $request->validate([
+            'password'=>'required',
+            'newpassword'=>'required',
+        ]);
+        $user=User::find(session('id'))->first();
+        if(Hash::check($request->newpassword,$user->password)){
+            $data=[
+                'password'=>Hash::make($request->newpassword)
+            ];
+            $this->user->updatePassword(session('id'),$data);
+            $request->session()->flash('message', 'success');
+            return back();
+        }
+        $request->session()->flash('message', 'password incorrect');
         return back();
     }
 }
