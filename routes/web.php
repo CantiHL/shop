@@ -100,6 +100,7 @@ Route::middleware('idcheck')->group(function (){
     Route::get('/account/detail',[UserController::class,'account'])->name('user_account');
     Route::post('/account/upadtepasword',[UserController::class,'upadtepasword'])->name('upadtepasword');
     Route::post('/account/update',[UserController::class,'update_account'])->name('update_account');
+    Route::post('/account/update-order',[OrderController::class,'updateOrderQuantity'])->name('updateOrderQuantity');
 });
 
 Route::get('/home-page',[HomeController::class,'index'])->name('client_home');

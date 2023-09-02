@@ -63,8 +63,56 @@
         </form>
     </div>
 		<hr>
-		@include('clients.footer')
+    <div class="container">
+        <div class="card shadow mb-4">
+            <h4 class="text-success text-lg">Ordered</h4>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-danger" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Total</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($ordered as $order)
+                                <tr>
+                                    <form action="{{route('updateOrderQuantity')}}" method="post">
+                                        <input type="hidden" name="order_id" value="{{$order->id}}">
+                                        <input type="hidden" name="product_id" value="{{$order->product->id}}">
+                                        @csrf
 
+                                        <td>{{$order->product->name}}</td>
+                                        <td>{{$order->product->price}}</td>
+                                        <td><input min="1" type="number" name="quantity" value="{{$order->quantity}}"></td>
+                                        <td>${{$order->quantity*$order->product->price}}</td>
+                                        <td>{{$order->status}}</td>
+                                        @if($order->status=='pending'&&$order->payment_id==null)
+                                            <td>
+                                                <button type="submit" name="update" class="btn btn-success">Update</button>
+                                                <button type="submit" name="cancel" class="btn btn-danger">Cancel</button>
+                                            </td>
+                                        @else
+                                            <td>
+                                                <button disabled type="submit" name="update" class="btn btn-success">Update</button>
+                                                <button disabled type="submit" name="cancel" class="btn btn-danger">Cancel</button>
+                                            </td>
+                                        @endif
+                                    </form>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+		@include('clients.footer')
 <script>
     var btnChange=document.querySelector('.btnchangepass');
     btnChange.addEventListener('click',function (e){

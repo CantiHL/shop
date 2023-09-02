@@ -14,6 +14,7 @@
                                                 <p>Name: <strong>{{ strtoupper($record->name) }}</strong></p>
                                                 <p>Category: {{ $record->category->name }}</p>
                                                 <p>Brand: {{ $record->brand->name }}</p>
+                                                <p>Available: {{ $record->quantity }}</p>
                                                 <p>
                                                     @if($record->averageRating() != null)
                                                         {{$record->averageRating()}} <i class="fa fa-star text-danger"></i>

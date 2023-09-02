@@ -21,18 +21,20 @@
                 <table class="table table-bordered table-primary" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
+                            <th>ID</th>
                             <th>Name</th>
-                            <th>Update</th>
-                            <th>Delete</th>
+                            <th>Description</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($data_brands as $list_brand)
                         <tr>
+                            <td>{{ $list_brand->id }}</td>
                             <td>{{ $list_brand->name }}</td>
                             <td>{{ $list_brand->description }}</td>
-                            <td><a href="{{ route('edit_form_brand',['id'=>$list_brand->id]) }}" class="btn btn-block btn-info">Update</a></td>
-                            <td><a href="{{ route('delete_brand',['id'=>$list_brand->id]) }}" class="btn btn-block btn-danger" >Delete</a></td>
+                            <td><a href="{{ route('edit_form_brand',['id'=>$list_brand->id]) }}" class="btn btn-block btn-info">Update</a>
+                            <a href="{{ route('delete_brand',['id'=>$list_brand->id]) }}" class="btn btn-block btn-danger" >Delete</a></td>
                         </tr>
                         @endforeach
                     </tbody>

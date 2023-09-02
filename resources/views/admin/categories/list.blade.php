@@ -20,19 +20,20 @@
                 <table class="table table-bordered table-danger" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
+                            <th>ID</th>
                             <th>Name</th>
                             <th>Description</th>
-                            <th>Update</th>
-                            <th>Delete</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($data_categories as $list_category)
                         <tr>
+                            <td>{{ $list_category->id }}</td>
                             <td>{{ $list_category->name }}</td>
                             <td>{{ $list_category->description }}</td>
-                            <td><a class="btn btn-block btn-info btn-sm" href="{{ route('edit_form_category',['id'=>$list_category->id]) }}">Update</a></td>
-                            <td><a class="btn btn-block btn-danger btn-sm"  href="{{ route('delete_category',['id'=>$list_category->id]) }}">Delete</a></td>
+                            <td><a class="btn btn-block btn-info btn-sm" href="{{ route('edit_form_category',['id'=>$list_category->id]) }}">Update</a>
+                            <a class="btn btn-block btn-danger btn-sm"  href="{{ route('delete_category',['id'=>$list_category->id]) }}">Delete</a></td>
                         </tr>
                         @endforeach
                     </tbody>

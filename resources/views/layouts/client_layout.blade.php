@@ -8,7 +8,6 @@
     <link href="{{asset('assets/css/bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{asset('assets/css/font-awesome.min.css')}}" rel="stylesheet">
     <link href="{{asset('assets/css/main.css')}}" rel="stylesheet">
-{{--    <link href="{{asset('assets/css/custom.css')}}" rel="stylesheet">--}}
 	<link href="{{asset('assets/css/responsive.css')}}" rel="stylesheet">
 
     <style>

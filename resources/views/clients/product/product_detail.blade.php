@@ -40,6 +40,7 @@
                                 <p><b>Brand:</b> {{$product_detail->brand->name}}</p>
                                 <p><b>Category:</b> {{$product_detail->category->name}}</p>
                                 <p><b>Created_at:</b>{{$product_detail->created_at}}</p>
+                                <p><b>Quantity:</b>{{$product_detail->quantity}}</p>
                                 <p>
                                     @if($product_detail->averageRating() != null)
                                         <b>{{$product_detail->averageRating()}}</b> <i class="fa fa-star text-danger">
@@ -68,6 +69,10 @@
 <script src="{{asset('clients/js/jquery.js')}}"></script>
 <script src="{{asset('clients/js/bootstrap.min.js')}}"></script>
 <script src="{{asset('clients/js/main.js')}}"></script>
+
+<script src="{{asset('assets/js/jquery.js')}}"></script>
+<script src="{{asset('assets/js/main.js')}}"></script>
+<script src="{{asset('assets/js/custom.js')}}"></script>
 <script>
     $(function () {
         $.ajaxSetup({
@@ -97,9 +102,5 @@
         });
     });
 </script>
-
-<script src="{{asset('assets/js/jquery.js')}}"></script>
-<script src="{{asset('assets/js/main.js')}}"></script>
-<script src="{{asset('assets/js/custom.js')}}"></script>
 </body>
 </html>

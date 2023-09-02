@@ -16,6 +16,9 @@
 <body>
 	@include('clients.header')
 	<section id="cart_items">
+        @if(session()->has('message'))
+            <h3 class="text-error text-center text-danger">{{session()->get('message')}}</h3>
+        @endif
 		<div class="container">
 			<div class="table-responsive cart_info">
 				<table class="table table-condensed">

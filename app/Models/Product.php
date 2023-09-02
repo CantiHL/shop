@@ -61,9 +61,9 @@ class Product extends Model
     {
         return DB::table('products')->where('id',$id)->update($data);
     }
-    public function updateStatus($id,$value)
+    public function updateQuantity($id,$value)
     {
-        return DB::table('products')->where('id',$id)->update(['status'=>$value],);
+        return DB::table('products')->where('id',$id)->update(['quantity'=>$value],);
     }
     public function get_detail($id)
     {

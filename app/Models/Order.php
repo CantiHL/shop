@@ -31,13 +31,17 @@ class Order extends Model
         return DB::table('orders')->where('id','=',$id)->delete();
     }
 
-    public function update_status(mixed $id, array $data)
+    public function update_status($id, $data)
     {
         return DB::table('orders')->where('id','=',$id)->update($data);
     }
     public function updatePaymentId($id,$idPayment)
     {
         return DB::table('orders')->where('id','=',$id)->update(['payment_id'=>$idPayment]);
+    }
+    public function updateQuantity($id,$value)
+    {
+        return DB::table('orders')->where('id','=',$id)->update(['quantity'=>$value]);
     }
     public function product()
     {

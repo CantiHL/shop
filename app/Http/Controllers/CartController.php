@@ -39,12 +39,20 @@ class CartController extends Controller
     }
     public function update_cart_item(Request $request)
     {
-       $cart=session()->get('cart');
-       $id=$request->id;
-       $quantity=$request->quantity;
-       $cart[$id]['quantity']=$quantity;
-       session()->put('cart',$cart);
-       return back();
+        $id=$request->id;
+        $newquantity=$request->quantity;
+        $product=Product::where('id',$id)->first();
+        if ($product->quantity>=$newquantity){
+            $cart=session()->get('cart');
+            $id=$request->id;
+            $quantity=$newquantity;
+            $cart[$id]['quantity']=$quantity;
+            session()->put('cart',$cart);
+            return back();
+        }else{
+            return back()->with('message','sorry! quantity doesnt enough!');
+        }
+
     }
     public function delete_item_cart(Request $request){
         $cart=(session()->get('cart'));

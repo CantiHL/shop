@@ -20,6 +20,7 @@
                 <table class="table table-bordered table-success" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
+                            <th>ID</th>
                             <th>Name</th>
                             <th>Price</th>
                             <th>Brand</th>
@@ -27,7 +28,7 @@
                             <th>Description</th>
                             <th>Image</th>
                             <th>Pro Date</th>
-                            <th>Status</th>
+                            <th>Quantity</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -35,6 +36,7 @@
                     <tbody>
                         @foreach ($data_products as $list_products)
                         <tr>
+                            <td>{{ $list_products->id }}</td>
                             <td>{{ $list_products->name }}</td>
                             <td>{{ number_format($list_products->price,0,'', '.') }}</td>
                             <td>{{ $list_products->brand->name }}</td>
@@ -46,11 +48,7 @@
                             </td>
                             <td><img width="100" height="60" src="{{ asset('assets/img/products/'.$list_products->image)  }}" alt="{{ $list_products->image }}"></td>
                             <td>{{ date("d-m-Y H:i:s",strtotime($list_products->created_at)) }}</td>
-                             @if($list_products->status==0)
-                                <td><a class="btn btn-block btn-success" href="{{ route('update_status_product',['id'=>$list_products->id,'value'=>1]) }}">Available</a></td>
-                            @else
-                                 <td><a class="btn btn-block btn-success" href="{{ route('update_status_product',['id'=>$list_products->id,'value'=>0]) }}">Sold Out</a></td>
-                            @endif
+                            <td>{{ $list_products->quantity }}</td>
                             <td><a class="btn btn-block btn-info" href="{{ route('edit_form_product',['id'=>$list_products->id]) }}">Update</a><br>
                                 <a class="btn btn-block btn-danger" href="{{ route('delete_product',['id'=>$list_products->id]) }}">Delete</a>
                             </td>

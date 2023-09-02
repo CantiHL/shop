@@ -5,10 +5,6 @@ use App\Models\Order;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Product;
-use App\Models\Category;
-use App\Models\Brand;
-use App\Models\Review;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Mail;
 
@@ -17,7 +13,8 @@ class UserController extends Controller
     private $user;
     public function __construct(
         private readonly Order $order,
-        private readonly PaypalController $paypalController
+        private readonly PaypalController $paypalController,
+        private readonly Product $product
     )
     {
         $this->user=new User();
@@ -26,7 +23,8 @@ class UserController extends Controller
      public function account()
      {
          $user=$this->user->getUserById(session('id'));
-        return view('account', compact('user'));
+         $ordered=Order::with('product')->where('user_id',session('id'))->get();
+        return view('account', compact(['user','ordered']));
      }
      public function update_account(Request $request)
      {
@@ -62,6 +60,7 @@ class UserController extends Controller
                 $name=$user->user_name;
                 $data=[
                     'product_id'=>$cart['id'],
+                    'user_id'=>$id_user,
                     'quantity'=>$cart['quantity'],
                     'name'=>$name,
                     'phone'=>$user->phone,
@@ -97,10 +96,12 @@ class UserController extends Controller
                     'created_at'=>date('Y-m-d H:i:s')
                 ];
             }
+            $product=Product::where('id',$cart['id'])->first();
+            $new_quantity=$product->quantity-$cart['quantity'];
+            $this->product->updateQuantity($cart['id'],$new_quantity);
             $orderID[]=$this->order->insertOrder($data);
         }
         $request->request->add(['orderID'=>$orderID]);
-//        dd($carts);
         Mail::send('emails.order',compact('carts'),function ($mail) use($name, $email){
             $mail->subject('Thanks');
             $mail->to($email,$name);
@@ -140,10 +141,10 @@ class UserController extends Controller
         ];
         if ($data) {
             if ($this->user->insert($data)) {
-                $request->session()->flash('message', 'Insert  Success');
+                $request->session()->flash('message', 'Success');
                 return back();
             } else {
-                $request->session()->flash('message', 'Insert  Unsuccess. Please check your enter info');
+                $request->session()->flash('message', 'Error');
                 return back();
             }
 
@@ -181,7 +182,7 @@ class UserController extends Controller
         $request->session()->flash('message', 'Delete success');
         return back();
     }
-    public function upadtepasword(Request $request)
+    public function updatePassword(Request $request)
     {
         $request->validate([
             'password'=>'required',

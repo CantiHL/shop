@@ -61,7 +61,7 @@
                                         <input type="hidden" name="id" value="{{ $order->id }}">
                                         <select class="form-control-sm"  name="status" id="status">
                                             <option selected value="{{$order->status}}">{{$order->status}}</option>
-                                            <option value="preparing">preparing</option>
+                                            <option value="pending">pending</option>
                                             <option value="delivering">delivering</option>
                                             <option value="done">done</option>
                                             <option value="refunded">refunded</option>

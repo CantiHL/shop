@@ -47,6 +47,7 @@ class ProductController extends Controller
             'name' => 'required|min:3',
             'price' => 'required|integer',
             'brand_id' => 'required',
+            'image' => 'required',
             'category_id' => 'required',
         ]);
 

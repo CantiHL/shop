@@ -5,15 +5,15 @@
             @foreach ($data_categories as $record)
                 @if(request()->get('filter_category')==$record->id)
                     <div class="form-check">
-                        <input id="id_{{ $record->id }}" class="form-check-input" name="filter_category" type="radio" value="{{ $record->id }}" id="flexCheckDefault" checked="true">
-                        <label for="id_{{ $record->id }}" class="form-check-label" for="flexCheckDefault">
+                        <input id="id_category{{ $record->id }}" class="form-check-input" name="filter_category" type="checkbox" value="{{ $record->id }}"  checked="true">
+                        <label for="id_category{{ $record->id }}" class="form-check-label" >
                             {{ $record->name }}
                         </label>
                     </div>
                 @else
                     <div class="form-check">
-                        <input id="id_{{ $record->id }}" class="form-check-input" name="filter_category" type="radio" value="{{ $record->id }}" id="flexCheckDefault" >
-                        <label for="id_{{ $record->id }}" class="form-check-label" for="flexCheckDefault">
+                        <input id="id_{{ $record->id }}" class="form-check-input" name="filter_category" type="checkbox" value="{{ $record->id }}"  >
+                        <label for="id_{{ $record->id }}" class="form-check-label" >
                             {{ $record->name }}
                         </label>
                     </div>
@@ -28,8 +28,8 @@
                     @if(request()->get('filter_brand')==$record1->id)
                         <ul class="nav nav-pills nav-stacked">
                             <div class="form-check">
-                                <input id="id_{{ $record1->id }}" class="form-check-input" name="filter_brand" type="radio" value="{{ $record1->id }}" id="flexCheckDefault" checked="true">
-                                <label for="id_{{ $record1->id }}" class="form-check-label" for="flexCheckDefault">
+                                <input id="id_brand{{ $record1->id }}" class="form-check-input" name="filter_brand" type="checkbox" value="{{ $record1->id }}"  checked="true">
+                                <label for="id_brand{{ $record1->id }}" class="form-check-label" >
                                     {{ $record1->name }}
                                 </label>
                             </div>
@@ -37,8 +37,8 @@
                     @else
                         <ul class="nav nav-pills nav-stacked">
                             <div class="form-check">
-                                <input id="id_{{ $record1->id }}" class="form-check-input" name="filter_brand" type="radio" value="{{ $record1->id }}" id="flexCheckDefault" >
-                                <label for="id_{{ $record1->id }}" class="form-check-label" for="flexCheckDefault">
+                                <input id="id_brand{{ $record1->id }}" class="form-check-input" name="filter_brand" type="checkbox" value="{{ $record1->id }}"  >
+                                <label for="id_brand{{ $record1->id }}" class="form-check-label" >
                                     {{ $record1->name }}
                                 </label>
                             </div>
