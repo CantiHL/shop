@@ -29,9 +29,9 @@ Route::get('/auth/google',[GoogleAuthController::class,'redirect'])->name('googl
 Route::get('/auth/google/call-back',[GoogleAuthController::class,'callbackGoogle']);
 
 Route::prefix('/pay/paypal')->group(function (){
-    Route::post('/',[PaypalController::class,'pay'])->name('pay');
+    Route::post('/',[PaypalController::class,'checkout'])->name('pay');
     Route::get('/success',[PaypalController::class,'success'])->name('success');
-    Route::get('/error',[PaypalController::class,'error'])->name('error');
+    Route::get('/cancel',[PaypalController::class,'cancel'])->name('cancel');
 });
 
 Route::middleware('auth.middleware')->group(function (){
@@ -109,3 +109,4 @@ Route::post('/review',[ReviewController::class,'review'])->name('review');
 Route::post('/checkout',[UserController::class,'checkout'])->name('checkout');
 Route::get('/product-detail/{id}',[ProductController::class,'product_detail'])->name('product_detail');
 Route::get('/sendemail',[UserController::class,'sendemail']);
+//Route::post('/refund', [PaypalController::class,'refund'])->name('refund');

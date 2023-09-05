@@ -1,7 +1,7 @@
 @extends('layouts.client_layout')
 @section('content')
 					<div class="features_items"><!--features_items-->
-						<h2 class="title text-center">Smart Phone</h2>
+						<h2 class="title text-center">Product</h2>
 						@foreach ($data_products as $record)
 						<a href="{{ route('product_detail',['id'=>$record->id]) }}">
 							<div class="col-sm-4">

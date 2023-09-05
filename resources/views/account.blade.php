@@ -86,7 +86,6 @@
                                         <input type="hidden" name="order_id" value="{{$order->id}}">
                                         <input type="hidden" name="product_id" value="{{$order->product->id}}">
                                         @csrf
-
                                         <td>{{$order->product->name}}</td>
                                         <td>{{$order->product->price}}</td>
                                         <td><input min="1" type="number" name="quantity" value="{{$order->quantity}}"></td>
@@ -95,6 +94,11 @@
                                         @if($order->status=='pending'&&$order->payment_id==null)
                                             <td>
                                                 <button type="submit" name="update" class="btn btn-success">Update</button>
+                                                <button type="submit" name="cancel" class="btn btn-danger">Cancel</button>
+                                            </td>
+                                        @elseif($order->status==='pending'&&$order->payment_id!==null)
+                                            <td>
+                                                <button disabled type="submit" name="update" class="btn btn-success">Update</button>
                                                 <button type="submit" name="cancel" class="btn btn-danger">Cancel</button>
                                             </td>
                                         @else

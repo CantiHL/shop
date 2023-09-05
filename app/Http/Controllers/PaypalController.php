@@ -6,6 +6,9 @@ use App\Models\Order;
 use App\Models\Payment;
 use Illuminate\Http\Request;
 use Omnipay\Omnipay;
+use PayPal\Api\Amount;
+use PayPal\Api\Refund;
+use PayPal\Api\Sale;
 
 class PaypalController extends Controller
 {
@@ -27,7 +30,7 @@ class PaypalController extends Controller
                 'amount'=>$request->amount,
                 'currency'=>env('PAYPAL_CURRENCY'),
                 'returnUrl'=>route('success',['ordersID'=>$request->orderID]),
-                'cancelUrl'=>route('error')
+                'cancelUrl'=>route('cancel')
             ))->send();
 
             if ($response->isRedirect()){
@@ -54,6 +57,7 @@ class PaypalController extends Controller
                 $data=[
                     'payment_id'=>$arr['id'],
                     'payer_id'=>$arr['payer']['payer_info']['payer_id'],
+                    'sale_id'=>$arr['transactions'][0]['related_resources'][0]['sale']['id'],
                     'payer_email'=>$arr['payer']['payer_info']['email'],
                     'amount'=>$arr['transactions'][0]['amount']['total'],
                     'currency'=>env('PAYPAL_CURRENCY'),
@@ -76,5 +80,23 @@ class PaypalController extends Controller
 
     public function error(){
         return "something went wrong ";
+    }
+    public function refund(Request $request)
+    {
+        $saleId = $request->input('sale_id');
+        $amount=$request->input('amount');
+       $transaction = $this->gateway->refund(array(
+           'amount'    => number_format($amount,2,'.'),
+//           'amount'    => '10.00',
+            'transactionId' => $saleId,
+            'currency'  => 'USD',
+        ));
+        $transaction->setTransactionReference($saleId);
+        $response = $transaction->send();
+        if ($response->isSuccessful()) {
+           return "Refund transaction was successful!\n";
+       }else{
+            return "Refund transaction was failure!\n";
+        }
     }
 }
