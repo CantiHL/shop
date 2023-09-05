@@ -40,13 +40,7 @@ class OrderController extends Controller
         $this->order->deleteOrder($request->id);
         return back();
     }
-    public function statistical(Request $request){
-        $quantity = Order::where('orders.status','done')->sum('quantity');
-        $revenue = Order::join('products', 'orders.product_id', '=', 'products.id')->where('orders.status','done')
-            ->sum(DB::raw('orders.quantity * products.price'));
-        $details = $this->order->getDetailsOrder();
-        return view('admin.statistical.statistical', compact(['quantity','revenue','details']));
-    }
+
     public function expportOrders(){
         return Excel::download(new OrdersExport(), 'orders.xlsx');
     }

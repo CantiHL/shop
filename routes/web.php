@@ -6,6 +6,7 @@ use App\Http\Controllers\GoogleAuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PaypalController;
+use App\Http\Controllers\StatisticalController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\AdminController;
@@ -38,7 +39,7 @@ Route::middleware('auth.middleware')->group(function (){
     Route::get('/admin',[AdminController::class,'index'])->name('dashboard');
     Route::prefix('/order')->group(function (){
         Route::get('/list-order',[OrderController::class,'order'])->name('order');
-        Route::get('/statistical',[OrderController::class,'statistical'])->name('statistical');
+        Route::get('/statistical',[StatisticalController::class,'statistical'])->name('statistical');
         Route::get('/export-orders',[OrderController::class,'expportOrders'])->name('expport_orders');
         Route::get('/list-order/update-order',[OrderController::class,'update_order'])->name('update_order');
         Route::get('/list-order/delete-order',[OrderController::class,'delete_order'])->name('delete_order');

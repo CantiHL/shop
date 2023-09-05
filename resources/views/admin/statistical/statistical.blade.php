@@ -41,14 +41,38 @@
                     </thead>
 
                     <tbody>
-                        <tr>
-                            <td>{{$quantity}}</td>
-                            <td>$ {{$revenue}}</td>
+                    <tr>
+                        <td>{{$quantity}}</td>
+                        <td>$ {{$revenue}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <h1 class="h3 mb-2 text-gray-800">Users</h1>
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered table-success" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Bought</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    @foreach($statiscalUsers as $statiscalUser ) @endforeach
+                    <tr>
+                            <td>{{$statiscalUser->user_name}}</td>
+                            <td>{{$statiscalUser->email}}</td>
+                            <td>{{$statiscalUser->quantity}}</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
-
 @stop

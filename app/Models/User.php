@@ -87,4 +87,13 @@ class User extends Authenticatable
     {
         return DB::table('users')->where('id',$id)->update($data);
     }
+    public function getStatiscalUser()
+    {
+        return DB::table('users')
+            ->join('orders', 'orders.user_id', '=', 'users.id')
+            ->select('user_id', DB::raw('SUM(orders.quantity) as quantity'), 'users.user_name', 'users.email')
+            ->where('orders.status', '=', 'done')
+            ->groupBy('user_id', 'users.user_name', 'users.email')
+            ->get();;
+    }
 }
