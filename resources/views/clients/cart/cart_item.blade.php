@@ -54,13 +54,13 @@
 								<b>{{ $cart['name'] }}</b>
 							</td>
 							<td >
-								<p>{{ number_format($cart['price'],'0','','.') }}</p>
+								<p>${{ number_format($cart['price'],'0','','.') }}</p>
 							</td>
 							<td >
 									<input name="quantity" id="quantity" type="number" min="1" value="{{ $cart['quantity'] }}">
 							</td>
 							<td >
-								<p>{{ number_format($cart['price']*$cart['quantity'],'0','','.') }}</p>
+								<p>${{ number_format($cart['price']*$cart['quantity'],'0','','.') }}</p>
 							</td>
 							@csrf
 							<td >

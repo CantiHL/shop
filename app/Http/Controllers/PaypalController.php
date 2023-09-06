@@ -86,7 +86,7 @@ class PaypalController extends Controller
         $saleId = $request->input('sale_id');
         $amount=$request->input('amount');
        $transaction = $this->gateway->refund(array(
-           'amount'    => number_format($amount,2,'.'),
+           'amount'    => $amount,
 //           'amount'    => '10.00',
             'transactionId' => $saleId,
             'currency'  => 'USD',

@@ -64,12 +64,13 @@
                     </thead>
 
                     <tbody>
-                    @foreach($statiscalUsers as $statiscalUser ) @endforeach
+                    @foreach($statiscalUsers as $statiscalUser )
                     <tr>
                             <td>{{$statiscalUser->user_name}}</td>
                             <td>{{$statiscalUser->email}}</td>
                             <td>{{$statiscalUser->quantity}}</td>
                         </tr>
+                    @endforeach
                     </tbody>
                 </table>
             </div>

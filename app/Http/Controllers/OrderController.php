@@ -74,8 +74,8 @@ class OrderController extends Controller
         }elseif ($order->payment_id!==null&&$order->status==='pending'){
             if (array_key_exists('cancel',$request->input())){
                 $new_quantity=$product->quantity+$request->quantity;
-//                $this->product->updateQuantity($product_id,$new_quantity);
-//                $this->order->update_status($order_id,['status'=>'cancel']);
+                $this->product->updateQuantity($product_id,$new_quantity);
+                $this->order->update_status($order_id,['status'=>'cancel']);
                 $payment=Payment::where('id',$order->payment_id)->first();
                 $request->request->add(['sale_id'=>$payment->sale_id,'amount'=>$order->quantity*$product->price]);
                 $this->paypalController->refund($request);

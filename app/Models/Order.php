@@ -26,7 +26,15 @@ class Order extends Model
             ->groupBy('product_id', 'products.name', 'products.price')
             ->get();;
     }
-
+    public function getStatiscalUser()
+    {
+        return DB::table('orders')
+            ->join('users', 'users.id', '=', 'orders.user_id')
+            ->select('user_name','users.email', DB::raw('SUM(quantity) as quantity'))
+            ->where('status', '=', 'done')
+            ->groupBy('user_id', 'user_name', 'email')
+            ->get();
+    }
     public function deleteOrder($id)
     {
         return DB::table('orders')->where('id','=',$id)->delete();
