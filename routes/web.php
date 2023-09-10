@@ -99,15 +99,14 @@ Route::prefix('/auth')->group(function (){
 
 Route::middleware('idcheck')->group(function (){
     Route::get('/account/detail',[UserController::class,'account'])->name('user_account');
-    Route::post('/account/upadtepasword',[UserController::class,'upadtepasword'])->name('upadtepasword');
+    Route::post('/account/upadtepasword',[UserController::class,'updatePassword'])->name('upadtepasword');
     Route::post('/account/update',[UserController::class,'update_account'])->name('update_account');
     Route::post('/account/update-order',[OrderController::class,'updateOrderQuantity'])->name('updateOrderQuantity');
 });
 
-Route::get('/home-page',[HomeController::class,'index'])->name('client_home');
+Route::get('/',[HomeController::class,'index'])->name('client_home');
 Route::get('/search',[HomeController::class,'index'])->name('search');
 Route::post('/review',[ReviewController::class,'review'])->name('review');
 Route::post('/checkout',[UserController::class,'checkout'])->name('checkout');
 Route::get('/product-detail/{id}',[ProductController::class,'product_detail'])->name('product_detail');
 Route::get('/sendemail',[UserController::class,'sendemail']);
-//Route::post('/refund', [PaypalController::class,'refund'])->name('refund');

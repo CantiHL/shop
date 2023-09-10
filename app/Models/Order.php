@@ -30,9 +30,9 @@ class Order extends Model
     {
         return DB::table('orders')
             ->join('users', 'users.id', '=', 'orders.user_id')
-            ->select('user_name','users.email', DB::raw('SUM(quantity) as quantity'))
+            ->select('user_name','users.email','users.phone', DB::raw('SUM(quantity) as quantity'))
             ->where('status', '=', 'done')
-            ->groupBy('user_id', 'user_name', 'email')
+            ->groupBy('user_id', 'user_name', 'email','phone')
             ->get();
     }
     public function deleteOrder($id)

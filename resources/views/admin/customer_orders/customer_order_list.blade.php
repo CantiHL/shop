@@ -64,10 +64,8 @@
                                             <option value="pending">pending</option>
                                             <option value="delivering">delivering</option>
                                             <option value="done">done</option>
-                                            <option value="refunded">refunded</option>
                                         </select>
                                 </td>
-
                                 <td>
                                             <button class="btn btn-success btn-sm btn-block" type="submit">Update</button>
                                         </form>

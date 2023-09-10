@@ -193,11 +193,12 @@ class UserController extends Controller
             $data=[
                 'password'=>Hash::make($request->newpassword)
             ];
-            $this->user->updatePassword(session('id'),$data);
+            $this->user->updatePassword($user->id,$data);
             $request->session()->flash('message', 'success');
-            return back();
         }
-        $request->session()->flash('message', 'password incorrect');
+        else{
+            $request->session()->flash('message', 'password incorrect');
+        }
         return back();
     }
 }

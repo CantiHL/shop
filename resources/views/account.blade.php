@@ -49,12 +49,12 @@
             @csrf
             <div class="form-group col-md-6">
                 <label for="name">Password</label>
-                <input type="text" class="form-control" name="password" id="name">
+                <input required  type="text" class="form-control" name="password" id="name">
                 <p class="alert-danger">@error('password') {{ $message }}@enderror</p>
             </div>
             <div class="form-group col-md-6">
                 <label for="phone">New Password</label>
-                <input type="text" class="form-control" name="newpassword" id="phone">
+                <input required type="text" class="form-control" name="newpassword" id="phone">
                 <p class="alert-danger">@error('newpassword') {{ $message }}@enderror</p>
             </div>
             <div class="form-group col-md-3">

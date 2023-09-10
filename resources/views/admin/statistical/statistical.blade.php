@@ -59,6 +59,7 @@
                     <tr>
                         <th>Name</th>
                         <th>Email</th>
+                        <th>Phone</th>
                         <th>Bought</th>
                     </tr>
                     </thead>
@@ -68,6 +69,7 @@
                     <tr>
                             <td>{{$statiscalUser->user_name}}</td>
                             <td>{{$statiscalUser->email}}</td>
+                            <td>{{$statiscalUser->phone}}</td>
                             <td>{{$statiscalUser->quantity}}</td>
                         </tr>
                     @endforeach
