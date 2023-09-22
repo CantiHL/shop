@@ -1,20 +1,10 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Account</title>
-	<link href="{{asset('clients/css/bootstrap.min.css')}}" rel="stylesheet">
-	<link href="{{asset('clients/css/main.css')}}" rel="stylesheet">
-</head>
-<body>
-	@include('clients.header')
-	<hr>
-	@if(session('message'))
-	<h3 class="alert-success text-center">{{session('message')}}</h3>
-	@endif
+@extends('layouts.basic_layout')
+@section('content')
 	<div class="container">
-		<form action="{{route('update_account')}}" method="post">
+        @if(session('message'))
+            <h3 class="alert-success text-center">{{session('message')}}</h3>
+        @endif
+        <form action="{{route('update_account')}}" method="post">
             @csrf
             <div class="form-group col-md-6">
                 <label for="name">User Name</label>
@@ -89,7 +79,7 @@
                                         <td>{{$order->product->name}}</td>
                                         <td>{{$order->product->price}}</td>
                                         <td><input min="1" type="number" name="quantity" value="{{$order->quantity}}"></td>
-                                        <td>${{$order->quantity*$order->product->price}}</td>
+                                        <td>${{$order->quantity*$order->product->price}} @if($order->payment_id!==null) (Payed) @endif </td>
                                         <td>{{$order->status}}</td>
                                         @if($order->status=='pending'&&$order->payment_id==null)
                                             <td>
@@ -116,7 +106,6 @@
             </div>
         </div>
     </div>
-		@include('clients.footer')
 <script>
     var btnChange=document.querySelector('.btnchangepass');
     btnChange.addEventListener('click',function (e){
@@ -129,5 +118,4 @@
         }
     });
 </script>
-</body>
-</html>
+@endsection

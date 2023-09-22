@@ -31,19 +31,6 @@
             <label  class="form-label">Address</label>
             <input type="text" name="address" class="form-control" value="{{ $data->address }}">
         </div>
-        <div class="col-6">
-            <label  class="form-label" >Position</label>
-            <select class="form-control" name="position" id="">
-                @if($data->position==0)
-                    <option selected value="0">0</option>
-                    <option value="1">1</option>
-
-                @else
-                    <option selected value="1">1</option>
-                    <option value="0">0</option>
-                @endif
-            </select>
-        </div>
 	  @csrf
 	  <div class="col-12">
 	    <button type="submit" class="btn btn-block mt-2 btn-primary">Update</button>

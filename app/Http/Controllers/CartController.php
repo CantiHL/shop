@@ -39,6 +39,10 @@ class CartController extends Controller
     }
     public function update_cart_item(Request $request)
     {
+        $request->validate([
+                'quantity'=>'required|integer|min:1',
+            ]
+        );
         $id=$request->id;
         $newquantity=$request->quantity;
         $product=Product::where('id',$id)->first();
@@ -50,7 +54,7 @@ class CartController extends Controller
             session()->put('cart',$cart);
             return back();
         }else{
-            return back()->with('message','sorry! quantity doesnt enough!');
+            return back()->with('message','quantity error!');
         }
 
     }

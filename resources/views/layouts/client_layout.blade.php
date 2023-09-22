@@ -74,7 +74,6 @@
 	</section>
     @include('clients.footer')
     <script src="{{asset('assets/js/jquery.js')}}"></script>
-    <script src="{{asset('assets/js/main.js')}}"></script>
     <script src="{{asset('assets/js/custom.js')}}"></script>
 </body>
 </html>

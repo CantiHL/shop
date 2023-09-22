@@ -4,8 +4,8 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Login</title>
-	<link href="{{asset('clients/css/bootstrap.min.css')}}" rel="stylesheet">
-	<link href="{{asset('clients/css/main.css')}}" rel="stylesheet">
+	<link href="{{asset('assets/css/bootstrap.min.css')}}" rel="stylesheet">
+	<link href="{{asset('assets/css/main.css')}}" rel="stylesheet">
 </head>
 <body>
 	@include('clients.header')
@@ -27,7 +27,7 @@
 							<button type="submit" class="btn btn-default">Login</button>
 
 						</form>
-                        <a href="{{route('google-auth')}}" style="margin-top: 2rem" class="btn btn-default">Login with google</a>
+{{--                        <a href="{{route('google-auth')}}" style="margin-top: 2rem" class="btn btn-default">Login with google</a>--}}
 
 					</div><!--/login form-->
 				</div>

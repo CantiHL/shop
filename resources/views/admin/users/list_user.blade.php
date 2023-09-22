@@ -26,7 +26,6 @@
                             <th>Password</th>
                             <th>Phone</th>
                             <th>Address</th>
-                            <th>position</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -39,10 +38,9 @@
                             <td>{{ str_replace($list_user->password,'***********',$list_user->password) }}</td>
                             <td>{{ $list_user->phone }}</td>
                             <td>{{ $list_user->address }}</td>
-                            <td>{{ $list_user->position }}</td>
                             <td>
-                                <a href="{{ route('edit_form_user',['id'=>$list_user->id]) }}" class="btn btn-block btn-info">Update</a>
-                                <a href="{{ route('delete_user',['id'=>$list_user->id]) }}" class="btn btn-block btn-danger" >Delete</a>
+                                <a href="{{ route('edit_form_user',['id'=>$list_user->id]) }}" class="btn btn-block btn-info btn-sm">Update</a>
+                                <a href="{{ route('delete_user',['id'=>$list_user->id]) }}" class="btn btn-block btn-danger btn-sm" >Delete</a>
                             </td>
                         </tr>
                     @endforeach

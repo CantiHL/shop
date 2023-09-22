@@ -12,8 +12,13 @@
         </div>
         <div class="row ml-3">
             <div class="col-3">
-                <a class="btn btn-success" href="{{ route('add_product') }}">Add Product</a>
+                <a class="btn btn-success btn-sm" href="{{ route('add_product') }}">Add Product</a>
             </div>
+            <form action="{{ route('import-product') }}" method="post" enctype="multipart/form-data">
+                @csrf
+                <input type="file" name="file_import" accept=".xlsx">
+                <button type="submit" class="btn btn-success btn-sm">Import Product</button>
+            </form>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -37,7 +42,9 @@
                         @foreach ($data_products as $list_products)
                         <tr>
                             <td>{{ $list_products->id }}</td>
-                            <td>{{ $list_products->name }}</td>
+                            <td>
+                                {{ $list_products->name }}
+                            </td>
                             <td>{{ number_format($list_products->price,0,'', '.') }}</td>
                             <td>{{ $list_products->brand->name }}</td>
                             <td>{{ $list_products->category->name }}</td>
@@ -49,8 +56,8 @@
                             <td><img width="100" height="60" src="{{ asset('assets/img/products/'.$list_products->image)  }}" alt="{{ $list_products->image }}"></td>
                             <td>{{ date("d-m-Y H:i:s",strtotime($list_products->created_at)) }}</td>
                             <td>{{ $list_products->quantity }}</td>
-                            <td><a class="btn btn-block btn-info" href="{{ route('edit_form_product',['id'=>$list_products->id]) }}">Update</a><br>
-                                <a class="btn btn-block btn-danger" href="{{ route('delete_product',['id'=>$list_products->id]) }}">Delete</a>
+                            <td><a class="btn btn-block btn-info btn-sm" href="{{ route('edit_form_product',['id'=>$list_products->id]) }}">Update</a><br>
+                                <a class="btn btn-block btn-danger btn-sm" href="{{ route('delete_product',['id'=>$list_products->id]) }}">Delete</a>
                             </td>
                         </tr>
                         @endforeach

@@ -1,9 +1,11 @@
 @extends('layouts.admin_layout')
+
 @section('content')
 @if (session('message'))
     <p class="alert-info text-center">{{ session('message') }}</p>
 @endif
     <!-- Page Heading -->
+
     <h1 class="h3 mb-2 text-gray-800">Tables</h1>
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
@@ -30,29 +32,28 @@
                             <tr>
                                 <td>{{$order->id}}</td>
                                 <td>
-                                    ID: <strong>{{$order->product->id}}</strong><br>
-                                    Name: <strong>{{$order->product->name}}</strong><br>
-                                    price: <strong>${{$order->product->price}}</strong><br>
-                                    Quantity : <strong>{{$order->quantity}}</strong><br>
+                                    <p>ID: {{$order->product->id}}</p>
+                                    <p>Name: {{$order->product->name}}</p>
+                                    <p>price: ${{$order->product->price}}</p>
+                                    <p>Quantity : {{$order->quantity}}</p>
                                 </td>
                                 <td>
-                                    Name: <strong>{{$order->name}}</strong><br>
-                                    Phone: <strong>{{$order->phone}}</strong><br>
-                                    Address: <strong>{{$order->address}}</strong><br>
+                                    <p>Name: {{$order->name}}</p>
+                                    <p>Phone: {{$order->phone}}</p>
+                                    <p>Address: {{$order->address}}</p>
                                 </td>
                                 <td>{{$order->note}}</td>
                                 <td>
                                     @if(isset($order->payment->payment_id))
-                                        Pay Method: Paypal <br>
-                                        Payment Id: {{$order->payment->payment_id}}<br>
-                                        payer Email: {{$order->payment->payer_email}} <br>
-                                        Amount: ${{$order->payment->amount}} <br>
-                                        Payment Status: {{$order->payment->payment_status}} <br>
-                                        Created At: {{$order->payment->created_at}} <br>
+                                       <p>Pay Method: Paypal</p>
+                                       <p>Payment Id: {{$order->payment->payment_id}}</p>
+                                       <p>payer Email: {{$order->payment->payer_email}} </p>
+                                       <p>Amount: ${{$order->payment->amount}} </p>
+                                       <p>Payment Status: {{$order->payment->payment_status}}</p>
+                                       <p>Created At: {{$order->payment->created_at}}</p>
                                     @else
                                         pay wnen recive
                                     @endif
-
                                 </td>
                                 <td>{{$order->created_at}}</td>
                                 <td>

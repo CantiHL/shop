@@ -45,12 +45,16 @@ class OrderController extends Controller
         return Excel::download(new OrdersExport(), 'orders.xlsx');
     }
     public function updateOrderQuantity(Request $request){
+        if ($request->quantity<1){
+            return back()->with('message','error');
+        }
         $order_id=$request->order_id;
         $product_id=$request->product_id;
         $order=Order::where('id',$order_id)->first();
         $product=Product::where('id',$product_id)->first();
         if($order->payment_id===null&&$order->status==='pending'){
             if (array_key_exists('update',$request->input())){
+                //if quantity lower than original
                 if ($order->quantity>=$request->quantity){
                     $new_quantity=$product->quantity+$order->quantity-$request->quantity;
                     $this->product->updateQuantity($product_id,$new_quantity);

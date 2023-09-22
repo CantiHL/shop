@@ -1,18 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Shop_Digital</title>
-    <link href="{{asset('assets/css/bootstrap.min.css')}}" rel="stylesheet">
-    <link href="{{asset('assets/css/font-awesome.min.css')}}" rel="stylesheet">
-    <link href="{{asset('assets/css/main.css')}}" rel="stylesheet">
-    <link href="{{asset('assets/css/custom.css')}}" rel="stylesheet">
-    <link href="{{asset('assets/css/responsive.css')}}" rel="stylesheet">
-</head>
-<body>
-@include('clients.header')
+@extends('layouts.basic_layout')
+@section('content')
 <div class="product-detail-content container">
     <div class="row">
         <div class="col-sm-12 padding-right">
@@ -49,9 +36,7 @@
                                         ? <i class="fa fa-star text-danger"></i>
                                     @endif
                                 </p>
-                                <a href=""><img src="{{asset('clients/images/product-details/share.png')}}"
-                                                class="share img-responsive" alt=""/></a>
-                                <label for="">Description: </label>
+                                <label>Description: </label>
                                 <textarea readonly name="" id="" cols="30"
                                           rows="5">{{$product_detail->description}}</textarea>
                             </div><!--/product-information-->
@@ -65,14 +50,6 @@
 <div class="container">
     @include('clients.review')
 </div>
-@include('clients.footer')
-<script src="{{asset('clients/js/jquery.js')}}"></script>
-<script src="{{asset('clients/js/bootstrap.min.js')}}"></script>
-<script src="{{asset('clients/js/main.js')}}"></script>
-
-<script src="{{asset('assets/js/jquery.js')}}"></script>
-<script src="{{asset('assets/js/main.js')}}"></script>
-<script src="{{asset('assets/js/custom.js')}}"></script>
 <script>
     $(function () {
         $.ajaxSetup({
@@ -102,5 +79,4 @@
         });
     });
 </script>
-</body>
-</html>
+@endsection

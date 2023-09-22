@@ -23,7 +23,11 @@
 	    <label for="inputPassword4" class="form-label">Price</label>
 	    <input name="price" type="text" class="form-control" id="inputPassword4" value="{{ $record->price }}">
 	  </div>
-	  <div class="col-md-6">
+        <div class="col-md-4">
+            <label for="inputPassword4" class="form-label">Quantity</label>
+            <input name="quantity" type="number" class="form-control" id="inputPassword4" value="{{$record->quantity}}">
+        </div>
+	  <div class="col-md-4">
 	    <label for="inputState" class="form-label">Brand</label>
 	    <select name="brand_id" id="inputState" class="form-control" value="{{ $record->brand_id }}">
 			@foreach ($data_brands as $brand)
@@ -35,7 +39,7 @@
 			@endforeach
 	    </select>
 	  </div>
-	  <div class="col-md-6">
+	  <div class="col-md-4">
 	    <label for="inputState" class="form-label">Category</label>
 	    <select name="category_id" id="inputState" class="form-control" value="{{ $record->category_id }}">
 			@foreach ($data_categories as $category)

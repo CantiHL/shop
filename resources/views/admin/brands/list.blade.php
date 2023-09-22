@@ -33,8 +33,8 @@
                             <td>{{ $list_brand->id }}</td>
                             <td>{{ $list_brand->name }}</td>
                             <td>{{ $list_brand->description }}</td>
-                            <td><a href="{{ route('edit_form_brand',['id'=>$list_brand->id]) }}" class="btn btn-block btn-info">Update</a>
-                            <a href="{{ route('delete_brand',['id'=>$list_brand->id]) }}" class="btn btn-block btn-danger" >Delete</a></td>
+                            <td><a href="{{ route('edit_form_brand',['id'=>$list_brand->id]) }}" class="btn btn-block btn-info btn-sm">Update</a>
+                            <a href="{{ route('delete_brand',['id'=>$list_brand->id]) }}" class="btn btn-block btn-danger btn-sm" >Delete</a></td>
                         </tr>
                         @endforeach
                     </tbody>

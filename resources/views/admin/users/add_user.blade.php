@@ -35,13 +35,6 @@
             <label  class="form-label">Address</label>
             <input value="{{request()->old('address')}}" type="text" name="address" class="form-control">
         </div>
-        <div class="col-6">
-            <label  class="form-label" >Position</label>
-            <select class="form-control" name="position" id="">
-                    <option selected value="0">0</option>
-                    <option value="1">1</option>
-            </select>
-        </div>
         @csrf
         <div class="col-12">
             <button type="submit" class="btn btn-block mt-2 btn-primary">Add</button>

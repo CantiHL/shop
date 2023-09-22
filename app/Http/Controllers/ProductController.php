@@ -2,16 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\ProductsImport;
 use App\Models\Review;
 use App\Models\Product;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Brand;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
-use function Clue\StreamFilter\fun;
-
+use Maatwebsite\Excel\Facades\Excel;
 class ProductController extends Controller
 {
     /**
@@ -48,7 +46,9 @@ class ProductController extends Controller
             'price' => 'required|integer',
             'brand_id' => 'required',
             'image' => 'required',
+            'description' => 'required',
             'category_id' => 'required',
+            'quantity' => 'required',
         ]);
 
         $data_entered=[
@@ -57,6 +57,7 @@ class ProductController extends Controller
             'brand_id'=>$request->brand_id,
             'category_id'=>$request->category_id,
             'description'=>$request->description,
+            'quantity'=>$request->quantity,
             'created_at'=>now(),
         ];
         $image=$request->file('image');
@@ -98,6 +99,7 @@ class ProductController extends Controller
             'name' => 'required',
             'price' => 'required|integer',
             'description'=>'required',
+            'quantity' => 'required',
         ]);
 
         $data_entered=[
@@ -106,6 +108,7 @@ class ProductController extends Controller
             'brand_id'=>$request->brand_id,
             'category_id'=>$request->category_id,
             'description'=>$request->description,
+            'quantity'=>$request->quantity,
             'created_at'=>now(),
         ];
         if ($image=$request->file('image')) {
@@ -137,4 +140,10 @@ class ProductController extends Controller
 //        dd(DB::getQueryLog($reviews));
        return view('clients.product.product_detail',compact(['data','reviews']));
     }
+    public function import(Request $request){
+        $path = $request->file('file_import')->getRealPath();
+        Excel::import(new ProductsImport, $path);
+        return back()->with('message','success');
+    }
+
 }

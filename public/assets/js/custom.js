@@ -4,36 +4,30 @@ var slideInterval = setInterval(nextSlide, 3000); // Auto-next-slide interval in
 
 function showSlide(n) {
 for (var i = 0; i < slides.length; i++) {
-slides[i].style.display = 'none';
+    slides[i].style.display = 'none';
 }
-slides[n].style.display = 'block';
+    slides[n].style.display = 'block';
 }
-
 function nextSlide() {
-currentSlide = (currentSlide + 1) % slides.length;
-showSlide(currentSlide);
+    currentSlide = (currentSlide + 1) % slides.length;
+    showSlide(currentSlide);
 }
-
 function previousSlide() {
-currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-showSlide(currentSlide);
+    currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+    showSlide(currentSlide);
 }
-
 function restartSlideInterval() {
-clearInterval(slideInterval);
-slideInterval = setInterval(nextSlide, 2000);
+    clearInterval(slideInterval);
+    slideInterval = setInterval(nextSlide, 2000);
 }
-
-// Add event listeners for mouseenter and mouseleave to pause and play the auto-next-slide functionality
 document.addEventListener('mouseenter', function () {
-clearInterval(slideInterval);
+    clearInterval(slideInterval);
 });
 
 document.addEventListener('mouseleave', function () {
-restartSlideInterval();
+    restartSlideInterval();
 });
 
-// Show the first slide initially
 showSlide(currentSlide);
 
 $(function(){

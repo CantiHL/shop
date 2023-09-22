@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\GoogleAuthController;
 use App\Http\Controllers\HomeController;
@@ -52,6 +53,7 @@ Route::middleware('auth.middleware')->group(function (){
         Route::post('/edit/{id}',[ProductController::class,'update_to_db']);
         Route::get('/delete/{id}',[ProductController::class,'delete_product'])->name('delete_product');
         Route::get('/update-status/{id}/{value}',[ProductController::class,'update_status_product'])->name('update_status_product');
+        Route::post('/import',[ProductController::class,'import'])->name('import-product');
     });
 
     Route::prefix('/brand')->group(function (){
@@ -107,6 +109,6 @@ Route::middleware('idcheck')->group(function (){
 Route::get('/',[HomeController::class,'index'])->name('client_home');
 Route::get('/search',[HomeController::class,'index'])->name('search');
 Route::post('/review',[ReviewController::class,'review'])->name('review');
-Route::post('/checkout',[UserController::class,'checkout'])->name('checkout');
+Route::post('/checkout',[CheckoutController::class,'checkout'])->name('checkout');
 Route::get('/product-detail/{id}',[ProductController::class,'product_detail'])->name('product_detail');
 Route::get('/sendemail',[UserController::class,'sendemail']);

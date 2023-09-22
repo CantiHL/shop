@@ -4,7 +4,7 @@
     <div class="card shadow mb-4">
         <div class="card-body">
             <div class="table-responsive">
-                <a class="btn btn-google" href="{{route('expport_orders')}}">export excel</a>
+                <a class="btn btn-google btn-sm" href="{{route('expport_orders')}}">export excel</a>
                 <table class="table table-bordered table-success" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                     <tr>

@@ -18,7 +18,7 @@
 <br>
 @if (session()->has('id'))
 	<form action="{{ route('review') }} " method="post">
-        <label for="">Star: <i class="fa fa-star text-danger"></i></label>
+        <label>Star: <i class="fa fa-star text-danger"></i></label>
         <div class="row">
             <div class="col-sm-2">
                 <select class="form-control d-inline-block" name="rating" id="">
@@ -32,7 +32,7 @@
         </div>
         <input type="hidden" name="product_id" value="{{$product_detail->id}}">
 		@csrf
-        <label for="">Content: </label>
+        <label>Content: </label>
 		<textarea name="rv_content" id="" cols="30" rows="5" placeholder="Type your comment here..."></textarea><br>
 		<button style="margin: 10px 0;" class="btn btn-success" type="submit">Leave Comment</button>
 	</form>

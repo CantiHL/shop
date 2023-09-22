@@ -9,11 +9,7 @@ class Brand extends Model
 {
     use HasFactory;
     public function list(){
-        return DB::table('brands')->limit(5)->get();
-     }
-     public function updateStatus($id,$value)
-     {
-         return DB::table('brands')->where('id',$id)->update($value);
+        return DB::table('brands')->get();
      }
      public function listId($id)
      {

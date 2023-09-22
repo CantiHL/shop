@@ -12,9 +12,12 @@ class Product extends Model
     protected $fillable = [
         'name',
         'price',
-        'id',
-        'id',
-        'description'
+        'description',
+        'image',
+        'quantity',
+        'brand_id',
+        'category_id',
+        'created_at',
     ];
 
     public function list()
@@ -43,7 +46,7 @@ class Product extends Model
                 $query->orWhere('price',"$keyword");
             });
         }
-        return $data=$data->paginate(9);
+        return $data=$data->orderBy('id','ASC')->paginate(9);
     }
     public function listId($id)
     {
